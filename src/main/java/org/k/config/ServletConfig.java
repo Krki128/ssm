@@ -2,7 +2,6 @@ package org.k.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 import javax.servlet.Filter;
 
 public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
