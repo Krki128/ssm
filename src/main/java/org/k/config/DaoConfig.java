@@ -1,11 +1,9 @@
 package org.k.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInterceptor;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -17,11 +15,11 @@ import java.util.Properties;
 
 @PropertySource("classpath:jdbc.properties")
 public class DaoConfig {
-    @Value("${jdbc.driver")
+    @Value("${jdbc.driver}")
     private String driver;
-    @Value("${jdbc.url")
+    @Value("${jdbc.url}")
     private String url;
-    @Value("${jdbc.username")
+    @Value("${jdbc.username}")
     private String username;
     @Value("${jdbc.password}")
     private String password;
@@ -42,7 +40,15 @@ public class DaoConfig {
     }
 
     @Bean
-    PageInterceptor pageInterceptor(){
+    public MapperScannerConfigurer mapperScannerConfigurer(){
+        MapperScannerConfigurer mapperScannerConfigurer=new MapperScannerConfigurer();
+        mapperScannerConfigurer.setBasePackage("org.k.dao.mapper");
+        return mapperScannerConfigurer;
+    }
+
+
+    @Bean
+    public PageInterceptor pageInterceptor(){
         PageInterceptor pageInterceptor=new PageInterceptor();
         Properties properties=new Properties();
         properties.setProperty("helperDialect","mysql");
@@ -53,13 +59,12 @@ public class DaoConfig {
 
     @Bean
     public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource,
-             @Autowired PageInterceptor pageInterceptor){
+             PageInterceptor pageInterceptor){
         SqlSessionFactoryBean sqlSessionFactoryBean=new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setTypeAliasesPackage("");
+        sqlSessionFactoryBean.setTypeAliasesPackage("org.k.doa.pojo");
         sqlSessionFactoryBean.setDataSource(dataSource);
 
-        //sqlSessionFactoryBean.setConfiguration(DaoConfig.class);
-        //sqlSessionFactoryBean.setPlugins(pageInterceptor);
+        sqlSessionFactoryBean.setPlugins(pageInterceptor);
 
         return sqlSessionFactoryBean;
     }
