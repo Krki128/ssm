@@ -8,9 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(value = "org.k",excludeFilters = @ComponentScan.Filter(
-        type = FilterType.ANNOTATION,classes = {Controller.class}
-))
+@ComponentScan(value = "org.k",excludeFilters =
+    @ComponentScan.Filter(type = FilterType.ANNOTATION,classes = {Controller.class}))
 @EnableTransactionManagement
 @Import({DaoConfig.class})
 public class RootConfig {

@@ -2,6 +2,7 @@ package org.k.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -64,7 +64,7 @@ public class DaoConfig {
         sqlSessionFactoryBean.setTypeAliasesPackage("org.k.doa.pojo");
         sqlSessionFactoryBean.setDataSource(dataSource);
 
-        sqlSessionFactoryBean.setPlugins(pageInterceptor);
+        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
 
         return sqlSessionFactoryBean;
     }
