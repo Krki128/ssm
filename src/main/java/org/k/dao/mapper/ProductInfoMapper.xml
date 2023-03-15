@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.k.dao.mapper.ProductInfoMapper">
-  <resultMap id="BaseResultMap" type="org.k.dao.pojo.ProductInfo">
+  <resultMap id="BaseResultMap" type="org.k.dao.ProductInfo">
     <id column="p_id" jdbcType="INTEGER" property="pId" />
     <result column="p_name" jdbcType="VARCHAR" property="pName" />
     <result column="p_content" jdbcType="VARCHAR" property="pContent" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     p_id, p_name, p_content, p_price, p_image, p_number, type_id, p_date
   </sql>
-  <select id="selectByExample" parameterType="org.k.dao.pojo.ProductInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.k.dao.ProductInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
     delete from product_info
     where p_id = #{pId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.k.dao.pojo.ProductInfoExample">
+  <delete id="deleteByExample" parameterType="org.k.dao.ProductInfoExample">
     delete from product_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.k.dao.pojo.ProductInfo">
+  <insert id="insert" parameterType="org.k.dao.ProductInfo">
     insert into product_info (p_id, p_name, p_content, 
       p_price, p_image, p_number, 
       type_id, p_date)
@@ -110,7 +110,7 @@
       #{pPrice,jdbcType=INTEGER}, #{pImage,jdbcType=VARCHAR}, #{pNumber,jdbcType=INTEGER}, 
       #{typeId,jdbcType=INTEGER}, #{pDate,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="org.k.dao.pojo.ProductInfo">
+  <insert id="insertSelective" parameterType="org.k.dao.ProductInfo">
     insert into product_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pId != null">
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.k.dao.pojo.ProductInfoExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.k.dao.ProductInfoExample" resultType="java.lang.Long">
     select count(*) from product_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.pojo.ProductInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.ProductInfo">
     update product_info
     <set>
       <if test="pName != null">
@@ -244,7 +244,7 @@
     </set>
     where p_id = #{pId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.k.dao.pojo.ProductInfo">
+  <update id="updateByPrimaryKey" parameterType="org.k.dao.ProductInfo">
     update product_info
     set p_name = #{pName,jdbcType=VARCHAR},
       p_content = #{pContent,jdbcType=VARCHAR},

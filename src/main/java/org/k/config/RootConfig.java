@@ -13,4 +13,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @Import({DaoConfig.class})
 public class RootConfig {
+
 }

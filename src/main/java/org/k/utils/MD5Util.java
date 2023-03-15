@@ -8,6 +8,7 @@ public class MD5Util {
         try{
             MessageDigest messageDigest=MessageDigest.getInstance("SHA");
             messageDigest.update(string.getBytes());
+
             byte[] bytes=messageDigest.digest();
             StringBuilder hash= new StringBuilder();
             int temp;

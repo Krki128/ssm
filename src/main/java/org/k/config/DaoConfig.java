@@ -41,7 +41,8 @@ public class DaoConfig {
 
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(){
-        MapperScannerConfigurer mapperScannerConfigurer=new MapperScannerConfigurer();
+        MapperScannerConfigurer mapperScannerConfigurer=
+                new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("org.k.dao.mapper");
         return mapperScannerConfigurer;
     }
@@ -61,7 +62,7 @@ public class DaoConfig {
     public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource,
              PageInterceptor pageInterceptor){
         SqlSessionFactoryBean sqlSessionFactoryBean=new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setTypeAliasesPackage("org.k.doa.pojo");
+        sqlSessionFactoryBean.setTypeAliasesPackage("org.k.doa");
         sqlSessionFactoryBean.setDataSource(dataSource);
 
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});

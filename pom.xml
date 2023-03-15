@@ -194,7 +194,13 @@
       </plugin>
     </plugins>
     <resources>
-
+      <resource>
+        <directory>src/main/java/org.k/dao/mapper</directory>
+        <includes>
+          <include>*.xml</include>
+        </includes>
+        <filtering>false</filtering>
+      </resource>
     </resources>
   </build>
 </project>

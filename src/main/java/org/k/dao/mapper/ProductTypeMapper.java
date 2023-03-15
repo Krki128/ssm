@@ -2,8 +2,8 @@ package org.k.dao.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.k.dao.pojo.ProductType;
-import org.k.dao.pojo.ProductTypeExample;
+import org.k.dao.ProductType;
+import org.k.dao.ProductTypeExample;
 
 public interface ProductTypeMapper {
     long countByExample(ProductTypeExample example);

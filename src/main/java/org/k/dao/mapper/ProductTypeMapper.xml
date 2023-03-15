@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.k.dao.mapper.ProductTypeMapper">
-  <resultMap id="BaseResultMap" type="org.k.dao.pojo.ProductType">
+  <resultMap id="BaseResultMap" type="org.k.dao.ProductType">
     <id column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="type_name" jdbcType="VARCHAR" property="typeName" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     type_id, type_name
   </sql>
-  <select id="selectByExample" parameterType="org.k.dao.pojo.ProductTypeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.k.dao.ProductTypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,17 +90,17 @@
     delete from product_type
     where type_id = #{typeId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.k.dao.pojo.ProductTypeExample">
+  <delete id="deleteByExample" parameterType="org.k.dao.ProductTypeExample">
     delete from product_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.k.dao.pojo.ProductType">
+  <insert id="insert" parameterType="org.k.dao.ProductType">
     insert into product_type (type_id, type_name)
     values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="org.k.dao.pojo.ProductType">
+  <insert id="insertSelective" parameterType="org.k.dao.ProductType">
     insert into product_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="typeId != null">
@@ -119,7 +119,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.k.dao.pojo.ProductTypeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.k.dao.ProductTypeExample" resultType="java.lang.Long">
     select count(*) from product_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -147,7 +147,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.pojo.ProductType">
+  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.ProductType">
     update product_type
     <set>
       <if test="typeName != null">
@@ -156,7 +156,7 @@
     </set>
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.k.dao.pojo.ProductType">
+  <update id="updateByPrimaryKey" parameterType="org.k.dao.ProductType">
     update product_type
     set type_name = #{typeName,jdbcType=VARCHAR}
     where type_id = #{typeId,jdbcType=INTEGER}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--suppress SqlNoDataSourceInspection -->
 <mapper namespace="org.k.dao.mapper.AdminMapper">
-  <resultMap id="BaseResultMap" type="org.k.dao.pojo.Admin">
+  <resultMap id="BaseResultMap" type="org.k.dao.Admin">
     <id column="a_id" jdbcType="INTEGER" property="aId" />
     <result column="a_name" jdbcType="VARCHAR" property="aName" />
     <result column="a_pass" jdbcType="VARCHAR" property="aPass" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     a_id, a_name, a_pass
   </sql>
-  <select id="selectByExample" parameterType="org.k.dao.pojo.AdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.k.dao.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,19 +92,19 @@
     delete from admin
     where a_id = #{aId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="org.k.dao.pojo.AdminExample">
+  <delete id="deleteByExample" parameterType="org.k.dao.AdminExample">
     delete from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="org.k.dao.pojo.Admin">
+  <insert id="insert" parameterType="org.k.dao.Admin">
     insert into admin (a_id, a_name, a_pass
       )
     values (#{aId,jdbcType=INTEGER}, #{aName,jdbcType=VARCHAR}, #{aPass,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="org.k.dao.pojo.Admin">
+  <insert id="insertSelective" parameterType="org.k.dao.Admin">
     insert into admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="aId != null">
@@ -129,7 +129,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="org.k.dao.pojo.AdminExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.k.dao.AdminExample" resultType="java.lang.Long">
     select count(*) from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -161,7 +161,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.pojo.Admin">
+  <update id="updateByPrimaryKeySelective" parameterType="org.k.dao.Admin">
     update admin
     <set>
       <if test="aName != null">
@@ -173,7 +173,7 @@
     </set>
     where a_id = #{aId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="org.k.dao.pojo.Admin">
+  <update id="updateByPrimaryKey" parameterType="org.k.dao.Admin">
     update admin
     set a_name = #{aName,jdbcType=VARCHAR},
       a_pass = #{aPass,jdbcType=VARCHAR}

@@ -2,8 +2,8 @@ package org.k.dao.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.k.dao.pojo.Admin;
-import org.k.dao.pojo.AdminExample;
+import org.k.dao.Admin;
+import org.k.dao.AdminExample;
 
 public interface AdminMapper {
     long countByExample(AdminExample example);
