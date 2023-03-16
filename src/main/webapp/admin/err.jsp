@@ -3,9 +3,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<style type="text/css">
+		<title>error</title>
+		<style>
 			
 			*{
 				margin: 0px;

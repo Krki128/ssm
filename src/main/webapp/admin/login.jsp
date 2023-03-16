@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-		<title>Login</title>
+		<title>login</title>
 	</head>
 
 	<body>
@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
 				<img src="${pageContext.request.contextPath}/images/cloud.jpg" /><span>LOGIN</span>
 			</div>
 			<div id="bottom">
-				<form  action="${pageContext.request.contextPath}/admin/login" method="post">
+				<form  action="/" method="post">
 					<table style="border: 0px" id="table">
 						<tr>
 							<td class="td1">用户名：</td>
