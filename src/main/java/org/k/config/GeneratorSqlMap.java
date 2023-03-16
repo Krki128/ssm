@@ -1,17 +1,21 @@
 package org.k.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.sql.DataSource;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GeneratorSqlMap {
     static void generator() throws Exception{
-        List<String> warnings= new ArrayList<>();
+        List<String> warnings= new ArrayList<String>();
         boolean overwrite=true;
         File configFile=new File("C:\\Users\\26591\\Documents\\tool\\Code\\Java\\ssm\\src\\main\\resources\\GeneratorConfig.xml");
         ConfigurationParser  configurationParser=new ConfigurationParser(warnings);
@@ -22,6 +26,5 @@ public class GeneratorSqlMap {
     }
 
     public static void main(String[] args) throws Exception{
-        generator();
     }
 }

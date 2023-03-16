@@ -27,10 +27,10 @@ public class DaoConfig {
     @Bean
     public DataSource dataSource(){
         DruidDataSource dataSource =new DruidDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/ssm?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true");
+        dataSource.setUsername("root");
+        dataSource.setPassword("1226");
         return dataSource;
     }
 
@@ -66,7 +66,6 @@ public class DaoConfig {
         sqlSessionFactoryBean.setDataSource(dataSource);
 
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
-
         return sqlSessionFactoryBean;
     }
 }

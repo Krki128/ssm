@@ -2,6 +2,9 @@ package org.k.dao.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 import org.k.dao.Admin;
 import org.k.dao.AdminExample;
 
@@ -17,6 +20,14 @@ public interface AdminMapper {
     int insertSelective(Admin row);
 
     List<Admin> selectByExample(AdminExample example);
+
+    @Results(id = "adminMap",value = {
+            @Result(id = true,column = "a_id",property = "aId"),
+            @Result(column = "a_name",property = "aName"),
+            @Result(column = "a_pass",property = "aPass")
+    })
+    @Select("select * from admin")
+    List<Admin> selectAll();
 
     Admin selectByPrimaryKey(Integer aId);
 
