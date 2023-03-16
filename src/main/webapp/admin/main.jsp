@@ -36,7 +36,7 @@
 					</div>
 					<div id="lbottom">
 						<ul>
-							<a href="${pageContext.request.contextPath}/prod/split.action" target="myright" >
+							<a href="${pageContext.request.contextPath}/product/split" target="myright" >
 								<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/>&nbsp;&nbsp;&nbsp;&nbsp;商品管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 							</a>
 							<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
@@ -58,5 +58,4 @@
 			</div>
 		</div>
 	</body>
-
 </html>

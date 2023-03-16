@@ -128,7 +128,7 @@
             var hprice = $("#hprice").val();
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
-                url: "${pageContext.request.contextPath}/prod/ajaxSplitpaging.action",
+                url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
                 data: {"page": page,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
                 type: "post",
                 success: function () {
@@ -176,17 +176,13 @@
             价格：<input name="lprice" id="lprice">-<input name="hprice" id="hprice">
             <input type="button" value="查询" onclick="condition()">
         </form>
-    </div>
-    <br>
+    </div><br>
     <div id="table">
-
         <c:choose>
             <c:when test="${info.list.size()!=0}">
-
                 <div id="top">
                     <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
                     <a href="${pageContext.request.contextPath}/admin/addproduct.jsp">
-
                         <input type="button" class="btn btn-warning" id="btn1"
                                value="新增商品">
                     </a>
@@ -233,29 +229,24 @@
                         <div>
                             <nav aria-label="..." style="text-align:center;">
                                 <ul class="pagination">
-                                    <li>
-                                            <%--                                        <a href="${pageContext.request.contextPath}/prod/split.action?page=${info.prePage}" aria-label="Previous">--%>
+                                    <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${.prePage}" aria-label="Previous">--%>
                                         <a href="javascript:ajaxsplit(${info.prePage})" aria-label="Previous">
-
                                             <span aria-hidden="true">«</span></a>
                                     </li>
                                     <c:forEach begin="1" end="${info.pages}" var="i">
                                         <c:if test="${info.pageNum==i}">
-                                            <li>
-                                                    <%--                                                <a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
+                                            <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
                                                 <a href="javascript:ajaxsplit(${i})"
                                                    style="background-color: grey">${i}</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${info.pageNum!=i}">
-                                            <li>
-                                                    <%--                                                <a href="${pageContext.request.contextPath}/prod/split.action?page=${i}">${i}</a>--%>
+                                            <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}">${i}</a>--%>
                                                 <a href="javascript:ajaxsplit(${i})">${i}</a>
                                             </li>
                                         </c:if>
                                     </c:forEach>
-                                    <li>
-                                            <%--  <a href="${pageContext.request.contextPath}/prod/split.action?page=1" aria-label="Next">--%>
+                                    <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=1" aria-label="Next">--%>
                                         <a href="javascript:ajaxsplit(${info.nextPage})" aria-label="Next">
                                             <span aria-hidden="true">»</span></a>
                                     </li>
