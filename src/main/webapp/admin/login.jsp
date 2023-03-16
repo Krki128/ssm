@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
 				<img src="${pageContext.request.contextPath}/images/cloud.jpg" /><span>LOGIN</span>
 			</div>
 			<div id="bottom">
-				<form  action="/" method="post">
+				<form  action="/admin/login" method="post">
 					<table style="border: 0px" id="table">
 						<tr>
 							<td class="td1">用户名：</td>

@@ -1,4 +1,9 @@
 package org.k.service;
 
-public class ProductTypeService {
+import org.k.dao.ProductType;
+
+import java.util.List;
+
+public interface ProductTypeService {
+    public List<ProductType> getAllType();
 }

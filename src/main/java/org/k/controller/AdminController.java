@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
     AdminService adminService;
     public AdminController(AdminService adminService) {
         this.adminService =adminService;
     }
 
-    //@RequestMapping("/login")
+    @RequestMapping("/login")
     public String home(){
         return "login";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(String name, String pwd, Model model){
         Admin admin=adminService.login(name,pwd);
         if(admin!=null){

@@ -186,7 +186,7 @@
                         <input type="button" class="btn btn-warning" id="btn1"
                                value="新增商品">
                     </a>
-                    <input type="button" class="btn btn-warning" id="btn1"
+                    <input type="button" class="btn btn-warning" id="btn2"
                            value="批量删除" onclick="deleteBatch()">
                 </div>
                 <!--显示分页后的商品-->
