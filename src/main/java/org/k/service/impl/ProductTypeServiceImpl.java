@@ -4,13 +4,15 @@ import org.k.dao.ProductType;
 import org.k.dao.ProductTypeExample;
 import org.k.dao.mapper.ProductTypeMapper;
 import org.k.service.ProductTypeService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class ProductTypeImpl implements ProductTypeService {
+@Service("ProductTypeServiceImpl")
+public class ProductTypeServiceImpl implements ProductTypeService {
     ProductTypeMapper productTypeMapper;
 
-    public ProductTypeImpl(ProductTypeMapper productTypeMapper) {
+    public ProductTypeServiceImpl(ProductTypeMapper productTypeMapper) {
         this.productTypeMapper = productTypeMapper;
     }
 

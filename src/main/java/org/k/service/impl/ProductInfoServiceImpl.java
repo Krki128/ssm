@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductInfoImpl implements ProductInfoService {
+public class ProductInfoServiceImpl implements ProductInfoService {
     ProductInfoMapper productInfoMapper;
 
-    public ProductInfoImpl(ProductInfoMapper productInfoMapper) {
+    public ProductInfoServiceImpl(ProductInfoMapper productInfoMapper) {
         this.productInfoMapper = productInfoMapper;
     }
 

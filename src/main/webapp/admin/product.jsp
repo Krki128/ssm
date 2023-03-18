@@ -42,6 +42,7 @@
         }
     </script>
     <script type="text/javascript">
+
     function mysubmit() {
         $("#myform").submit();
     }
@@ -161,27 +162,33 @@
 </head>
 <body>
 <div id="brall">
+    <!--商品管理>商品列表-->
     <div id="nav">
         <p>商品管理>商品列表</p>
     </div>
+    <!--筛选条件-->
     <div id="condition" style="text-align: center">
         <form id="myform">
-            商品名称：<input name="pname" id="pname">&nbsp;&nbsp;&nbsp;
+            商品名称：<input name="pname" id="pname">
             商品类型：<select name="typeid" id="typeid">
-            <option value="-1">请选择</option>
-            <c:forEach items="${typeList}" var="pt">
-                <option value="${pt.typeId}">${pt.typeName}</option>
-            </c:forEach>
-        </select>&nbsp;&nbsp;&nbsp;
+                <option value="-1">请选择</option>
+                <c:forEach items="${typeList}" var="pt">
+                    <option value="${pt.typeId}">${pt.typeName}</option>
+                </c:forEach>
+            </select>
             价格：<input name="lprice" id="lprice">-<input name="hprice" id="hprice">
             <input type="button" value="查询" onclick="condition()">
         </form>
     </div><br>
+    <!--显示商品-->
     <div id="table">
         <c:choose>
+
             <c:when test="${info.list.size()!=0}">
                 <div id="top">
+                    <!--全选按钮-->
                     <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
+                    <!--新增和删除-->
                     <a href="${pageContext.request.contextPath}/admin/addproduct.jsp">
                         <input type="button" class="btn btn-warning" id="btn1"
                                value="新增商品">
@@ -189,8 +196,8 @@
                     <input type="button" class="btn btn-warning" id="btn2"
                            value="批量删除" onclick="deleteBatch()">
                 </div>
-                <!--显示分页后的商品-->
                 <div id="middle">
+                    <!--显示分页后的商品-->
                     <table class="table table-bordered table-striped">
                         <tr>
                             <th></th>
@@ -229,10 +236,12 @@
                         <div>
                             <nav aria-label="..." style="text-align:center;">
                                 <ul class="pagination">
+                                    <!--后退按钮-->
                                     <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${.prePage}" aria-label="Previous">--%>
                                         <a href="javascript:ajaxsplit(${info.prePage})" aria-label="Previous">
                                             <span aria-hidden="true">«</span></a>
                                     </li>
+                                    <!--循环显示所以的页面数字链接-->
                                     <c:forEach begin="1" end="${info.pages}" var="i">
                                         <c:if test="${info.pageNum==i}">
                                             <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
@@ -246,6 +255,7 @@
                                             </li>
                                         </c:if>
                                     </c:forEach>
+                                    <!--前进按钮-->
                                     <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=1" aria-label="Next">--%>
                                         <a href="javascript:ajaxsplit(${info.nextPage})" aria-label="Next">
                                             <span aria-hidden="true">»</span></a>
@@ -267,9 +277,11 @@
                     </div>
                 </div>
             </c:when>
+
             <c:otherwise>
                 <div>
-                    <h2 style="width:1200px; text-align: center;color: orangered;margin-top: 100px">暂时没有符合条件的商品！</h2>
+                    <h2 style="width:1200px; text-align: center;color: orangered;margin-top: 100px">
+                        暂时没有符合条件的商品！</h2>
                 </div>
             </c:otherwise>
         </c:choose>

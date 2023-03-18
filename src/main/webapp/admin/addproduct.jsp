@@ -82,7 +82,6 @@
 							<td class="four"></td>
 							<td><span></span></td>
 						</tr>
-						
 						<tr>
 							<td class="one">总数量</td>
 							<td><input type="number" name="pNumber" class="two"></td>
