@@ -35,16 +35,16 @@
 			<div id="lbottom">
 				<ul>
 					<a href="${pageContext.request.contextPath}/product/split" target="myright" >
-						<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/>商品管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/> 商品管理 <span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-sort" style="color: white;"/>订单管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-sort" style="color: white;"/> 订单管理 <span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-user" style="color: white;"/>用户管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-user" style="color: white;"/> 用户管理 <span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-bullhorn" style="color: white"/>通知公告<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-bullhorn" style="color: white"/> 通知公告 <span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 				</ul>
 			</div>

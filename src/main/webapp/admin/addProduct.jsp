@@ -73,8 +73,8 @@
 						<tr>
 							<td class="three">图片介绍<br><br><br><br><br><br><br><br></td>
                             <td><div id="imgDiv" style="display:block; width: 40px; height: 50px;"/>
+								<span id="imgName"/><br>
 								<input type="file" id="pimage" name="pimage" onchange="fileChange()"><br><br><br>
-                                <span id="imgName"/>
                             </td>
 						</tr>
 						<tr class="three">
@@ -113,7 +113,7 @@
 								<input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
 								<script type="text/javascript">
 									function myclose() {
-										window.location="${pageContext.request.contextPath}/product/split?page=" + ${page};
+										window.location="${pageContext.request.contextPath}/product/split?page=" + ${pageNum};
 									}
 								</script>
 							</td>

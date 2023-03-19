@@ -11,7 +11,6 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/ajaxfileupload.js"></script>
 		<script type="text/javascript">
 			function fileChange(){//注意：此处不能使用jQuery中的change事件，因此仅触发一次，因此使用标签的：onchange属性
-
 				$.ajaxFileUpload({
 					url: '/product/ajaxImg',//用于文件上传的服务器端请求地址
 					secureuri: false,//一般设置为false
@@ -39,7 +38,7 @@
 			}
 
 			function close() {
-				window.location="${pageContext.request.contextPath}/product/split?page=" + ${page};
+				window.location="${pageContext.request.contextPath}/product/split?pageNum=" + ${pageNum};
 				//window.close();
 			}
 		</script>

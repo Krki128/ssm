@@ -43,88 +43,82 @@
                 $("#all").prop("checked",false);
             }
         }
-    </script>
-
-    <script type="text/javascript">
-
-    function mysubmit() {
+        function mysubmit() {
         $("#myform").submit();
     }
 
-    //批量删除
-    function deleteBatch() {
-        //得到所有选中复选框的对象,根据其长度判断是否有选中商品
-        var cks = $("input[name='ck']:checked");  //1,4,5
-        //如果有选中的商品
-        if(cks.length == 0){
-            alert("请先选择将要删除的商品!");
-        }else{
-            var str = "";
-            var pid = "";
-            if(confirm("您确定要删除"+cks.length+"条商品吗?")){
-                // alert("可以进行删除!");
-                //获取其value的值,进行字符串拼接
-                $.each(cks,function () {
-                    pid = $(this).val();
-                    //进行非空判断,避免出错
-                    if(pid != null){
-                        str += pid+",";  //145   ===>1,4,5,
-                    }
-                });
+        //批量删除
+        function deleteBatch() {
+            //得到所有选中复选框的对象,根据其长度判断是否有选中商品
+            var cks = $("input[name='ck']:checked");  //1,4,5
+            //如果没有选中的商品
+            if(cks.length == 0){
+                alert("请先选择将要删除的商品!");
+            }else{
+                var str = "";
+                var pid = "";
+                if(confirm("您确定要删除"+cks.length+"条商品吗?")){
+                    //获取其value的值,进行字符串拼接
+                    $.each(cks,function () {
+                        pid = $(this).val();
+                        //进行非空判断,避免出错
+                        if(pid != null){
+                            str += pid+",";  //145   ===>1,4,5,
+                        }
+                    });
+                    //发送ajax请求,进行批量删除的提交
+                    $.ajax({
+                        url:"${pageContext.request.contextPath}/prod/deleteBatch.action",
+                        data:{"pids":str},
+                        type:"post",
+                        dataType:"text",
+                        success:function (msg) {
+                            alert(msg);//批量删除成功!失败!不可删除!
+                            //将页面上显示商品数据的容器重新加载
+                            $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                        }
+                    });
+                }
+            }
+        }
 
-                //发送ajax请求,进行批量删除的提交
+        //单个删除
+        function del(pid,page) {
+            //弹框提示
+            if (confirm("您确定删除吗?")) {
+                //发出ajax的请求,进行删除操作
+                //取出查询条件
+                var pname = $("#pname").val();
+                var typeid = $("#typeid").val();
+                var lprice = $("#lprice").val();
+                var hprice = $("#hprice").val();
                 $.ajax({
-                    url:"${pageContext.request.contextPath}/prod/deleteBatch.action",
-                    data:{"pids":str},
-                    type:"post",
-                    dataType:"text",
-                    success:function (msg) {
-                        alert(msg);//批量删除成功!失败!不可删除!
-                        //将页面上显示商品数据的容器重新加载
+                    url: "${pageContext.request.contextPath}/product/delete.action",
+                    data: {"pid": pid,"page": page,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
+                    type: "post",
+                    dataType: "text",
+                    success: function (msg) {
+                        alert(msg);
                         $("#table").load("http://localhost:8080/admin/product.jsp #table");
                     }
                 });
             }
         }
-    }
 
-    //单个删除
-    function del(pid,page) {
-        //弹框提示
-        if (confirm("您确定删除吗?")) {
-            //发出ajax的请求,进行删除操作
-            //取出查询条件
-            var pname = $("#pname").val();
-            var typeid = $("#typeid").val();
-            var lprice = $("#lprice").val();
-            var hprice = $("#hprice").val();
-            $.ajax({
-                url: "${pageContext.request.contextPath}/prod/delete.action",
-                data: {"pid": pid,"page": page,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
-                type: "post",
-                dataType: "text",
-                success: function (msg) {
-                    alert(msg);
-                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                }
-            });
-        }
-    }
-
-    function update(pId) {
-        /*取出查询条件
+        //更新跳转
+        function update(pId) {
+            /*取出查询条件
         var pname = $("#pname").val();
         var typeid = $("#typeid").val();
         var lprice = $("#lprice").val();
         var hprice = $("#hprice").val();
          */
-        //向服务器提交请求,传递商品id
-        location.href = "${pageContext.request.contextPath}/produdct/updateProduct?pId=" + pId;
-    }
-</script>
+            //向服务器提交请求,传递商品id
+            let string="pId="+pId+"&pageNum="+${info.pageNum};
+            location.href = "${pageContext.request.contextPath}/product/updateProduct?"+string;
+        }
 
-    <!--分页的AJAX实现-->
-    <script type="text/javascript">
+        //分页的AJAX实现
         function ajaxsplit(page) {
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
@@ -138,6 +132,7 @@
             });
         }
 
+        //条件查询
         function condition() {
             //取出查询条件
             var pname = $("#pname").val();

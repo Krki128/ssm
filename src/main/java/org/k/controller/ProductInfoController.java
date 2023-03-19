@@ -35,16 +35,16 @@ public class ProductInfoController {
     }
 
     @RequestMapping("/split")
-    public String split(Model model,@RequestParam(defaultValue = "1") int page){
-        PageInfo<ProductInfo> info= productInfoService.splitPage(page,PAGE_SIZE);
-        model.addAttribute("info",info);
+    public String split(Model model,@RequestParam(defaultValue = "1") int pageNum){
+        PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(pageNum,PAGE_SIZE);
+        model.addAttribute("info",pageInfo);
         return "product";
     }
 
     @ResponseBody
     @RequestMapping("/ajaxSplitPaging")
-    public void ajaxSplitPaging(int page, HttpSession session){
-        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(page,PAGE_SIZE);
+    public void ajaxSplitPaging(int pageNum, HttpSession session){
+        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
         session.setAttribute("info",pageInfo);
     }
 
@@ -65,8 +65,8 @@ public class ProductInfoController {
     }
 
     @GetMapping("/addProduct")
-    public String addProduct(@RequestParam int page,Model model){
-        model.addAttribute("page",page);
+    public String addProduct(int pageNum,Model model){
+        model.addAttribute("pageNum",pageNum);
         return "addProduct";
     }
 
@@ -84,17 +84,19 @@ public class ProductInfoController {
     }
 
     @GetMapping("/updateProduct")
-    public String updateProduct(@RequestParam int page,int pId,Model model){
+    public String updateProduct(int pageNum,int pId,Model model){
         ProductInfo productInfo=productInfoService.selectByKey(pId);
-        model.addAttribute("page",page);
+        model.addAttribute("pageNum",pageNum);
         model.addAttribute("prod",productInfo);
         return "updateProduct";
     }
 
     @PostMapping("/updateProduct")
     public String updateProduct(ProductInfo productInfo,HttpSession session){
-        productInfo.setpImage(fileName);
-        fileName="";
+        if(!fileName.equals("")){
+            productInfo.setpImage(fileName);
+            fileName = "";
+        }
         int num=productInfoService.update(productInfo);
         if(num>0)
             session.setAttribute("msg","更新成功");
