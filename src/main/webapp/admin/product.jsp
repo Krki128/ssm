@@ -6,7 +6,6 @@
 <html>
 <head>
     <title>product</title>
-
     <script type="text/javascript">
     if ("${msg}" != "") {
         alert("${msg}");
@@ -43,9 +42,6 @@
                 $("#all").prop("checked",false);
             }
         }
-        function mysubmit() {
-        $("#myform").submit();
-    }
 
         //批量删除
         function deleteBatch() {
@@ -83,18 +79,13 @@
         }
 
         //单个删除
-        function del(pid,page) {
+        function del(pId,pageNum) {
             //弹框提示
             if (confirm("您确定删除吗?")) {
-                //发出ajax的请求,进行删除操作
-                //取出查询条件
-                var pname = $("#pname").val();
-                var typeid = $("#typeid").val();
-                var lprice = $("#lprice").val();
-                var hprice = $("#hprice").val();
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/product/delete.action",
-                    data: {"pid": pid,"page": page,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
+                    url: "${pageContext.request.contextPath}/product/deleteProduct",
+                    //data: {"pid": pid,"pageNum": pageNum,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
+                    data: {"pId": pId,"pageNum": pageNum},
                     type: "post",
                     dataType: "text",
                     success: function (msg) {
@@ -105,7 +96,7 @@
             }
         }
 
-        //更新跳转
+        //跳转更新jsp
         function update(pId) {
             /*取出查询条件
         var pname = $("#pname").val();
@@ -119,11 +110,11 @@
         }
 
         //分页的AJAX实现
-        function ajaxsplit(page) {
+        function ajaxsplit(pageNum) {
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
-                data: {"page": page},
+                data: {"pageNum": pageNum},
                 type: "post",
                 success: function () {
                     //重新加载显示分页数据的容器
@@ -179,7 +170,7 @@
                     <!--全选按钮-->
                     <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
                     <!--新增和删除-->
-                    <a href="${pageContext.request.contextPath}/product/addProduct?page=${info.pageNum}">
+                    <a href="${pageContext.request.contextPath}/product/addProduct?pageNum=${info.pageNum}">
                         <input type="button" class="btn btn-warning" id="btn1" value="新增商品">
                     </a>
                     <input type="button" class="btn btn-warning" id="btn2" value="批量删除" onclick="deleteBatch()">

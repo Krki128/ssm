@@ -15,15 +15,15 @@
 				$.ajaxFileUpload({
 					url:"${pageContext.request.contextPath}/product/ajaxImg",
 					secureuri: false,
-					fileElementId: 'pimage',
+					fileElementId: "pImage",
 					dataType:"json",
 					success:function (obj) {
 						//清空div
 						$("#imgDiv").empty();
 						//创建一个图片的标签
 						var imgObj = $("<img>");
-						alert(obj.imgurl);
-						imgObj.attr("src","/image_big/"+obj.imgurl);
+						alert(obj.imgUrl);
+						imgObj.attr("src","/image_big/"+obj.imgUrl);
 						imgObj.attr("width","100px");
 						imgObj.attr("height","100px");
 						//将图片追加到imgDiv
@@ -74,7 +74,7 @@
 							<td class="three">图片介绍<br><br><br><br><br><br><br><br></td>
                             <td><div id="imgDiv" style="display:block; width: 40px; height: 50px;"/>
 								<span id="imgName"/><br>
-								<input type="file" id="pimage" name="pimage" onchange="fileChange()"><br><br><br>
+								<input type="file" id="pImage" name="pImage" onchange="fileChange()"><br><br><br>
                             </td>
 						</tr>
 						<tr class="three">

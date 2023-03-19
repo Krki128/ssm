@@ -41,4 +41,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public int update(ProductInfo productInfo) {
         return productInfoMapper.updateByPrimaryKey(productInfo);
     }
+
+    public int deleteByKey(int pId) {
+        return productInfoMapper.deleteByPrimaryKey(pId);
+    }
 }

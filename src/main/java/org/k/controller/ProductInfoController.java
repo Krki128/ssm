@@ -50,17 +50,17 @@ public class ProductInfoController {
 
     @ResponseBody
     @RequestMapping("/ajaxImg")
-    public Object ajaxImg (MultipartFile pimage, HttpServletRequest request){
+    public Object ajaxImg (MultipartFile pImage, HttpServletRequest request){
         fileName= FileNameUtil.getUUIDFileName()+
-                FileNameUtil.getRealFileName(pimage.getOriginalFilename());
+                FileNameUtil.getRealFileName(pImage.getOriginalFilename());
         String path=request.getServletContext().getRealPath("/image_big");
         try{
-            pimage.transferTo(new File(path+File.separator+fileName));
+            pImage.transferTo(new File(path+File.separator+fileName));
         }catch (IOException e){
             e.printStackTrace();
         }
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("imgurl",fileName);
+        jsonObject.put("imgUrl",fileName);
         return jsonObject.toString();
     }
 
@@ -103,5 +103,19 @@ public class ProductInfoController {
         else
             session.setAttribute("msg","更新失败");
         return "forward:/product/split";
+    }
+
+    @ResponseBody
+    @GetMapping("/deleteProduct")
+    public String deleteProduct(int pId,int pageNum,HttpSession session){
+        int num=productInfoService.deleteByKey(pId);
+        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
+        session.setAttribute("info",pageInfo);
+        JSONObject jsonObject=new JSONObject();
+        if(num>0)
+            jsonObject.put("msg","删除成功");
+        else
+            jsonObject.put("msg","删除失败");
+        return jsonObject.toString();
     }
 }

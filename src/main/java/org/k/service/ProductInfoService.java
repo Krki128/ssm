@@ -15,4 +15,6 @@ public interface ProductInfoService {
     ProductInfo selectByKey(int pId);
 
     int update(ProductInfo productInfo);
+
+    int deleteByKey(int pId);
 }
