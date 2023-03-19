@@ -4,23 +4,27 @@ import org.k.dao.Admin;
 import org.k.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/admin")
+//@RequestMapping()
 public class AdminController {
     AdminService adminService;
     public AdminController(AdminService adminService) {
         this.adminService =adminService;
     }
 
-    @RequestMapping("/login")
+    /*@RequestMapping("/login")
+    @GetMapping
     public String home(){
         return "login";
-    }
+    }*/
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    //@RequestMapping(value = "/login",method = RequestMethod.POST)
+    @PostMapping("/admin")
     public String login(String name, String pwd, Model model){
         Admin admin=adminService.login(name,pwd);
         if(admin!=null){
@@ -29,7 +33,7 @@ public class AdminController {
         }
         else{
             model.addAttribute("errmsg","login fail");
-            return "login";
+            return "forward:/";
         }
     }
 }

@@ -9,4 +9,6 @@ public interface ProductInfoService {
     List<ProductInfo> getAll();
 
     PageInfo<ProductInfo> splitPage(int pageNum,int pageSize);
+
+    int save(ProductInfo productInfo);
 }

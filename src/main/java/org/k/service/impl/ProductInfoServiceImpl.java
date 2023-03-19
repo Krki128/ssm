@@ -29,4 +29,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         List<ProductInfo> productInfoList= productInfoMapper.selectByExample(productInfoExample);
         return new PageInfo<ProductInfo>(productInfoList);
     }
+
+    public int save(ProductInfo productInfo) {
+        return productInfoMapper.insert(productInfo);
+    }
 }

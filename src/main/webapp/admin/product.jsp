@@ -5,10 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>product</title>
+
     <script type="text/javascript">
-        if ("${msg}" != "") {
-            alert("${msg}");
-        }
+    if ("${msg}" != "") {
+        alert("${msg}");
+    }
     </script>
     <c:remove var="msg"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
@@ -16,6 +18,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addBook.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
+
     <script type="text/javascript">
         //全选复选框功能实现
         function allClick() {
@@ -41,6 +44,7 @@
             }
         }
     </script>
+
     <script type="text/javascript">
 
     function mysubmit() {
@@ -122,22 +126,16 @@
     <!--分页的AJAX实现-->
     <script type="text/javascript">
         function ajaxsplit(page) {
-            //取出查询条件
-            var pname = $("#pname").val();
-            var typeid = $("#typeid").val();
-            var lprice = $("#lprice").val();
-            var hprice = $("#hprice").val();
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
-                data: {"page": page,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
+                data: {"page": page},
                 type: "post",
                 success: function () {
                     //重新加载显示分页数据的容器
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
                 }
             });
-
         }
 
         function condition() {
@@ -148,7 +146,7 @@
             var hprice = $("#hprice").val();
             $.ajax({
                 type:"post",
-                url:"${pageContext.request.contextPath}/prod/ajaxSplitpaging.action",
+                url:"${pageContext.request.contextPath}/product/ajaxCondition",
                 data:{"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
                 success:function () {
                     //刷新显示数据的容器
@@ -157,8 +155,6 @@
             });
         }
     </script>
-
-    <title>product</title>
 </head>
 <body>
 <div id="brall">
@@ -183,7 +179,6 @@
     <!--显示商品-->
     <div id="table">
         <c:choose>
-
             <c:when test="${info.list.size()!=0}">
                 <div id="top">
                     <!--全选按钮-->
@@ -284,6 +279,7 @@
                         暂时没有符合条件的商品！</h2>
                 </div>
             </c:otherwise>
+
         </c:choose>
     </div>
 </div>

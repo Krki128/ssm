@@ -13,7 +13,7 @@
 		<script type="text/javascript">
 			function fileChange(){
 				$.ajaxFileUpload({
-					url:"${pageContext.request.contextPath}/prod/ajaxImg.action",
+					url:"${pageContext.request.contextPath}/product/ajaxImg",
 					secureuri: false,
 					fileElementId: 'pimage',
 					dataType:"json",
@@ -30,7 +30,6 @@
 						$("#imgDiv").append(imgObj);
 					}
 				});
-
 			}
 		</script>
 	</head>
@@ -41,7 +40,8 @@
 				<p>商品管理>新增商品</p>
 			</div>
 			<div id="table">
-				<form  id="myform" action="${pageContext.request.contextPath}/prod/save.action">
+				<form  id="myform" action="${pageContext.request.contextPath}/product/addProduct" method="post"
+					   enctype="multipart/form-data">
 					<table>
 						<tr>
 							<td class="one">商品名称</td>
@@ -70,12 +70,11 @@
 							<td class="four"></td>
 							<td><span id="priceerr"></span></td>
 						</tr>
-						
 						<tr>
-							<td class="three">图片介绍</td>
-                            <td> <br><div id="imgDiv" style="display:block; width: 40px; height: 50px;"></div><br><br><br><br>
-								<input type="file" id="pimage" name="pimage" onchange="fileChange()" >
-                                <span id="imgName" /><br>
+							<td class="three">图片介绍<br><br><br><br><br><br><br><br></td>
+                            <td><div id="imgDiv" style="display:block; width: 40px; height: 50px;"/>
+								<input type="file" id="pimage" name="pimage" onchange="fileChange()"><br><br><br>
+                                <span id="imgName"/>
                             </td>
 						</tr>
 						<tr class="three">
@@ -111,10 +110,10 @@
 								<input type="submit" value="提交" class="btn btn-success">
 							</td>
 							<td>
-								<input type="reset" value="取消" class="btn btn-default" onclick="myclose(${param.page})">
+								<input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
 								<script type="text/javascript">
-									function myclose(ispage) {
-										window.location="${pageContext.request.contextPath}/prod/split.action?page="+ispage;
+									function myclose() {
+										window.location="${pageContext.request.contextPath}/product/split";
 									}
 								</script>
 							</td>
