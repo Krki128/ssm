@@ -10,5 +10,9 @@ public interface ProductInfoService {
 
     PageInfo<ProductInfo> splitPage(int pageNum,int pageSize);
 
-    int save(ProductInfo productInfo);
+    int create(ProductInfo productInfo);
+
+    ProductInfo selectByKey(int pId);
+
+    int update(ProductInfo productInfo);
 }

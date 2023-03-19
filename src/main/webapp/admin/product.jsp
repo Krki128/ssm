@@ -111,15 +111,15 @@
         }
     }
 
-    function one(pid,page) {
-        //取出查询条件
+    function update(pId) {
+        /*取出查询条件
         var pname = $("#pname").val();
         var typeid = $("#typeid").val();
         var lprice = $("#lprice").val();
         var hprice = $("#hprice").val();
+         */
         //向服务器提交请求,传递商品id
-        var str = "?pid="+pid+"&page="+page+"&pname="+pname+"&typeid="+typeid+"&lprice="+lprice+"&hprice="+hprice;
-        location.href = "${pageContext.request.contextPath}/prod/one.action" + str;
+        location.href = "${pageContext.request.contextPath}/produdct/updateProduct?pId=" + pId;
     }
 </script>
 
@@ -184,12 +184,10 @@
                     <!--全选按钮-->
                     <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
                     <!--新增和删除-->
-                    <a href="${pageContext.request.contextPath}/admin/addproduct.jsp">
-                        <input type="button" class="btn btn-warning" id="btn1"
-                               value="新增商品">
+                    <a href="${pageContext.request.contextPath}/product/addProduct?page=${info.pageNum}">
+                        <input type="button" class="btn btn-warning" id="btn1" value="新增商品">
                     </a>
-                    <input type="button" class="btn btn-warning" id="btn2"
-                           value="批量删除" onclick="deleteBatch()">
+                    <input type="button" class="btn btn-warning" id="btn2" value="批量删除" onclick="deleteBatch()">
                 </div>
                 <div id="middle">
                     <!--显示分页后的商品-->
@@ -217,7 +215,7 @@
                                     <%--&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/admin/product?flag=one&pid=${p.pId}">修改</a></td>--%>
                                 <td>
                                     <button type="button" class="btn btn-info "
-                                            onclick="one(${p.pId},${info.pageNum})">编辑
+                                            onclick="update(${p.pId})">编辑
                                     </button>
                                     <button type="button" class="btn btn-warning" id="mydel"
                                             onclick="del(${p.pId},${info.pageNum})">删除

@@ -33,4 +33,5 @@ public class WebConfig implements WebMvcConfigurer {
     MultipartResolver multipartResolver(){
         return new CommonsMultipartResolver();
     }
+
 }

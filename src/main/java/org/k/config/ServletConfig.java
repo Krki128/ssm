@@ -33,4 +33,5 @@ public class ServletConfig extends AbstractAnnotationConfigDispatcherServletInit
         super.onStartup(servletContext);
         servletContext.addListener(ProductTypeListener.class);
     }
+
 }

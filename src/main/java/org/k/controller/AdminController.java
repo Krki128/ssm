@@ -24,9 +24,10 @@ public class AdminController {
     }*/
 
     //@RequestMapping(value = "/login",method = RequestMethod.POST)
-    @PostMapping("/admin")
+    @PostMapping("/login")
     public String login(String name, String pwd, Model model){
         Admin admin=adminService.login(name,pwd);
+        System.out.println("Logining");
         if(admin!=null){
             model.addAttribute("admin",admin);
             return "main";

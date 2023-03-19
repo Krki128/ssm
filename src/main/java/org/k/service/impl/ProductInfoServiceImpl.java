@@ -30,7 +30,15 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return new PageInfo<ProductInfo>(productInfoList);
     }
 
-    public int save(ProductInfo productInfo) {
+    public int create(ProductInfo productInfo) {
         return productInfoMapper.insert(productInfo);
+    }
+
+    public ProductInfo selectByKey(int pId) {
+        return  productInfoMapper.selectByPrimaryKey(pId);
+    }
+
+    public int update(ProductInfo productInfo) {
+        return productInfoMapper.updateByPrimaryKey(productInfo);
     }
 }

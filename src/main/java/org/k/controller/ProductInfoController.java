@@ -7,12 +7,8 @@ import org.k.service.ProductInfoService;
 import org.k.utils.FileNameUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -39,8 +35,8 @@ public class ProductInfoController {
     }
 
     @RequestMapping("/split")
-    public String split(Model model){
-        PageInfo<ProductInfo> info= productInfoService.splitPage(1,PAGE_SIZE);
+    public String split(Model model,@RequestParam(defaultValue = "1") int page){
+        PageInfo<ProductInfo> info= productInfoService.splitPage(page,PAGE_SIZE);
         model.addAttribute("info",info);
         return "product";
     }
@@ -68,15 +64,42 @@ public class ProductInfoController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "/addProduct",method = RequestMethod.POST)
-    public String addproduct(ProductInfo productInfo,HttpSession session){
+    @GetMapping("/addProduct")
+    public String addProduct(@RequestParam int page,Model model){
+        model.addAttribute("page",page);
+        return "addProduct";
+    }
+
+    @PostMapping("/addProduct")
+    public String addProduct(ProductInfo productInfo, HttpSession session){
         productInfo.setpImage(fileName);
+        fileName="";
         productInfo.setpDate(new Date());
-        int num=productInfoService.save(productInfo);
+        int num=productInfoService.create(productInfo);
         if(num>0)
             session.setAttribute("msg","添加成功");
         else
             session.setAttribute("msg","添加失败");
+        return "forward:/product/split";
+    }
+
+    @GetMapping("/updateProduct")
+    public String updateProduct(@RequestParam int page,int pId,Model model){
+        ProductInfo productInfo=productInfoService.selectByKey(pId);
+        model.addAttribute("page",page);
+        model.addAttribute("prod",productInfo);
+        return "updateProduct";
+    }
+
+    @PostMapping("/updateProduct")
+    public String updateProduct(ProductInfo productInfo,HttpSession session){
+        productInfo.setpImage(fileName);
+        fileName="";
+        int num=productInfoService.update(productInfo);
+        if(num>0)
+            session.setAttribute("msg","更新成功");
+        else
+            session.setAttribute("msg","更新失败");
         return "forward:/product/split";
     }
 }

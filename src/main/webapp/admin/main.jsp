@@ -29,23 +29,22 @@
 		<div id="bleft">
 			<div id="ltop">
 				<div id="lts">
-					<img src="${pageContext.request.contextPath}/images/logo.jpg" /><br />
-					<p style="text-align: center;">随机访客</p>
+					<img src="${pageContext.request.contextPath}/images/logo.jpg" /><br>
 				</div>
 			</div>
 			<div id="lbottom">
 				<ul>
 					<a href="${pageContext.request.contextPath}/product/split" target="myright" >
-						<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/>&nbsp;&nbsp;&nbsp;商品管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/>商品管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-sort" style="color: white;"/>&nbsp;&nbsp;&nbsp;订单管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-sort" style="color: white;"/>订单管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-user" style="color: white;"/>&nbsp;&nbsp;&nbsp;用户管理&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-user" style="color: white;"/>用户管理<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">
-						<li class="one"><span class="glyphicon glyphicon-bullhorn" style="color: white"/>&nbsp;&nbsp;&nbsp;;通知公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
+						<li class="one"><span class="glyphicon glyphicon-bullhorn" style="color: white"/>通知公告<span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 				</ul>
 			</div>

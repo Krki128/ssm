@@ -113,7 +113,7 @@
 								<input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
 								<script type="text/javascript">
 									function myclose() {
-										window.location="${pageContext.request.contextPath}/product/split";
+										window.location="${pageContext.request.contextPath}/product/split?page=" + ${page};
 									}
 								</script>
 							</td>
