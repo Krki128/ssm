@@ -35,7 +35,7 @@ public class ProductInfoController {
     }
 
     @RequestMapping("/split")
-    public String split(Model model,@RequestParam(defaultValue = "1") int pageNum){
+    public String split(Model model,int pageNum){
         PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(pageNum,PAGE_SIZE);
         model.addAttribute("info",pageInfo);
         return "product";
@@ -107,7 +107,8 @@ public class ProductInfoController {
 
     @ResponseBody
     @GetMapping("/deleteProduct")
-    public String deleteProduct(int pId,int pageNum,HttpSession session){
+    public Object deleteProduct(int pId,int pageNum,HttpSession session){
+        System.out.println("delete start");
         int num=productInfoService.deleteByKey(pId);
         PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
         session.setAttribute("info",pageInfo);
@@ -116,6 +117,8 @@ public class ProductInfoController {
             jsonObject.put("msg","删除成功");
         else
             jsonObject.put("msg","删除失败");
+
+        System.out.println("delete end");
         return jsonObject.toString();
     }
 }

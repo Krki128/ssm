@@ -110,10 +110,10 @@
 								<input type="submit" value="提交" class="btn btn-success">
 							</td>
 							<td>
-								<input type="reset" value="取消" class="btn btn-default" onclick="myclose()">
+								<input type="reset" value="取消" class="btn btn-default" onclick="close()">
 								<script type="text/javascript">
-									function myclose() {
-										window.location="${pageContext.request.contextPath}/product/split?page=" + ${pageNum};
+									function close() {
+										window.location="${pageContext.request.contextPath}/product/split?pageNum=" + ${pageNum};
 									}
 								</script>
 							</td>
