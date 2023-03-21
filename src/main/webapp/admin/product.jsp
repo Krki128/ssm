@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/addBook.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-
     <script type="text/javascript">
         //全选复选框功能实现
         function allClick() {
@@ -64,14 +63,16 @@
                     });
                     //发送ajax请求,进行批量删除的提交
                     $.ajax({
-                        url:"${pageContext.request.contextPath}/prod/deleteBatch.action",
-                        data:{"pids":str},
+                        url:"${pageContext.request.contextPath}/product/deleteProduct",
+                        data:{"pIds":str,"pageNum":${info.pageNum}},
                         type:"post",
                         dataType:"text",
-                        success:function (msg) {
-                            alert(msg);//批量删除成功!失败!不可删除!
+                        success:function (state) {
+                            //alert(state);
+                            state==1?alert("删除成功"):alert("删除失败");
                             //将页面上显示商品数据的容器重新加载
                             $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                            //$("#table").load("${pageContext.request.contextPath}/product/split #table");
                         }
                     });
                 }
@@ -79,18 +80,21 @@
         }
 
         //单个删除
-        function del(pId,pageNum) {
+        function del(pId) {
+            let str=pId+",";
             //弹框提示
             if (confirm("您确定删除吗?")) {
                 $.ajax({
                     url: "${pageContext.request.contextPath}/product/deleteProduct",
                     //data: {"pid": pid,"pageNum": pageNum,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
-                    data: {"pId": pId,"pageNum": pageNum},
+                    data: {"pIds": str,"pageNum": ${info.pageNum}},
                     type: "post",
                     dataType: "text",
-                    success: function (msg) {
-                        alert(msg);
+                    success: function (state) {
+                        //alert(state);
+                        state==1?alert("删除成功"):alert("删除失败");
                         $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                        //$("#table").load("${pageContext.request.contextPath}/product/split #table");
                     }
                 });
             }
@@ -119,6 +123,8 @@
                 success: function () {
                     //重新加载显示分页数据的容器
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    //$("#table").load("${pageContext.request.contextPath}/product/split #table");
+                    //location.href="${pageContext.request.contextPath}/product/split"
                 }
             });
         }
@@ -190,7 +196,8 @@
                         <c:forEach items="${info.list}" var="p">
                             <tr>
                                 <td valign="center" align="center">
-                                    <input type="checkbox" name="ck" id="ck" value="${p.pId}" onclick="ckClick()"></td>
+                                    <input type="checkbox" name="ck" id="ck" value="${p.pId}" onclick="ckClick()">
+                                </td>
                                 <td>${p.pName}</td>
                                 <td>${p.pContent}</td>
                                 <td>${p.pPrice}</td>
@@ -200,11 +207,14 @@
                                     <%--<td><a href="${pageContext.request.contextPath}/admin/product?flag=delete&pid=${p.pId}" onclick="return confirm('确定删除吗？')">删除</a>--%>
                                     <%--&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/admin/product?flag=one&pid=${p.pId}">修改</a></td>--%>
                                 <td>
-                                    <button type="button" class="btn btn-info "
+                                    <%--<button type="button" class="btn btn-info "
                                             onclick="update(${p.pId})">编辑
-                                    </button>
+                                    </button>--%>
+                                    <a href="${pageContext.request.contextPath}/product/updateProduct?pId=${p.pId}&pageNum=${info.pageNum}">
+                                        <input type="button" class="btn btn-info" value="编辑">
+                                    </a>
                                     <button type="button" class="btn btn-warning" id="mydel"
-                                            onclick="del(${p.pId},${info.pageNum})">删除
+                                            onclick="del(${p.pId})">删除
                                     </button>
                                 </td>
                             </tr>

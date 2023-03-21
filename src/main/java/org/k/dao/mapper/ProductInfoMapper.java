@@ -27,4 +27,6 @@ public interface ProductInfoMapper {
     int updateByPrimaryKeySelective(ProductInfo row);
 
     int updateByPrimaryKey(ProductInfo row);
+
+    int deleteBatch(String[] temp);
 }

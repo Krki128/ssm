@@ -102,6 +102,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <delete id="deleteBatch">
+    delete from product_info
+    where p_id in
+          <foreach item="pId" collection="array" open="(" close=")" separator=",">
+            #{pId}
+          </foreach>
+  </delete>
   <insert id="insert" parameterType="org.k.dao.ProductInfo">
     insert into product_info (p_id, p_name, p_content, 
       p_price, p_image, p_number, 

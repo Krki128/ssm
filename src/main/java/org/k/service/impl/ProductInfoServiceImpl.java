@@ -8,6 +8,7 @@ import org.k.dao.mapper.ProductInfoMapper;
 import org.k.service.ProductInfoService;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -24,9 +25,11 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     public PageInfo<ProductInfo> splitPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
+
         ProductInfoExample productInfoExample=new ProductInfoExample();
         productInfoExample.setOrderByClause("p_id desc");
         List<ProductInfo> productInfoList= productInfoMapper.selectByExample(productInfoExample);
+
         return new PageInfo<ProductInfo>(productInfoList);
     }
 
@@ -44,5 +47,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     public int deleteByKey(int pId) {
         return productInfoMapper.deleteByPrimaryKey(pId);
+    }
+
+    public int deleteBatch(String[] temp) {
+        return productInfoMapper.deleteBatch(temp);
     }
 }
