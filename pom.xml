@@ -84,6 +84,11 @@
       <artifactId>spring-tx</artifactId>
       <version>${spring.v}</version>
     </dependency>
+    <dependency>
+      <groupId>javax.transaction</groupId>
+      <artifactId>javax.transaction-api</artifactId>
+      <version>${javax.transaction.v}</version>
+    </dependency>
 
     <!--servlet-->
     <dependency>
@@ -125,11 +130,6 @@
     </dependency>
 
     <!--mybatis-->
-    <dependency>
-      <groupId>javax.transaction</groupId>
-      <artifactId>javax.transaction-api</artifactId>
-      <version>${javax.transaction.v}</version>
-    </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>

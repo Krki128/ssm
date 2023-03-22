@@ -102,13 +102,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <delete id="deleteBatch">
-    delete from product_info
-    where p_id in
-          <foreach item="pId" collection="array" open="(" close=")" separator=",">
-            #{pId}
-          </foreach>
-  </delete>
+
   <insert id="insert" parameterType="org.k.dao.ProductInfo">
     insert into product_info (p_id, p_name, p_content, 
       p_price, p_image, p_number, 
@@ -262,4 +256,26 @@
       p_date = #{pDate,jdbcType=DATE}
     where p_id = #{pId,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteBatch">
+  delete
+  from product_info
+  where p_id in
+  <foreach item="pId" collection="array" open="(" close=")" separator=",">
+    #{pId}
+  </foreach>
+</delete>
+  <select id="selectCondition" parameterType="ProductInfoVo" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from product_info
+    <where>
+      <if test="panme !=null and panme!=''">
+        and p_name like '%${pname}'
+      </if>
+      <if test="typeid !=null and typeid!=''">
+        and type_id =#{typeid}
+    </if>
+    </where>
+
+  </select>
 </mapper>

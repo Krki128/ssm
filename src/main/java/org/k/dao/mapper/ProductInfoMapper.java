@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.k.dao.ProductInfo;
 import org.k.dao.ProductInfoExample;
+import org.k.dao.vo.ProductInfoVo;
 
 public interface ProductInfoMapper {
     long countByExample(ProductInfoExample example);
@@ -29,4 +30,6 @@ public interface ProductInfoMapper {
     int updateByPrimaryKey(ProductInfo row);
 
     int deleteBatch(String[] temp);
+
+    List<ProductInfo> selectCondition(ProductInfoVo productInfoVo);
 }
