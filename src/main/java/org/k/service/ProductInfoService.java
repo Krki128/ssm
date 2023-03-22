@@ -18,5 +18,5 @@ public interface ProductInfoService {
 
     int deleteByKey(int pId);
 
-    int deleteBatch(String[] temp);
+    int deleteBatch(String[] strings);
 }

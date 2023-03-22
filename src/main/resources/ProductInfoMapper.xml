@@ -258,13 +258,13 @@
   </update>
 
   <delete id="deleteBatch">
-  delete
-  from product_info
-  where p_id in
-  <foreach item="pId" collection="array" open="(" close=")" separator=",">
-    #{pId}
-  </foreach>
-</delete>
+    delete
+    from product_info
+    where p_id=38<!--
+    in  <foreach item="pId" collection="strings" open="(" close=")" separator=",">
+            #{pId}
+        </foreach>-->
+  </delete>
   <select id="selectCondition" parameterType="ProductInfoVo" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from product_info

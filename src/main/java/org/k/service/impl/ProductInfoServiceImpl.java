@@ -8,7 +8,6 @@ import org.k.dao.mapper.ProductInfoMapper;
 import org.k.service.ProductInfoService;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -49,7 +48,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return productInfoMapper.deleteByPrimaryKey(pId);
     }
 
-    public int deleteBatch(String[] temp) {
-        return productInfoMapper.deleteBatch(temp);
+    public int deleteBatch(String[] strings) {
+        return productInfoMapper.deleteBatch(strings);
     }
 }

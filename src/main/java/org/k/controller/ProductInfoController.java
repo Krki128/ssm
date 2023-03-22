@@ -1,7 +1,6 @@
 package org.k.controller;
 
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.plugin.Interceptor;
 import org.json.JSONObject;
 import org.k.dao.ProductInfo;
 import org.k.service.ProductInfoService;
@@ -10,14 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/product")
@@ -126,11 +124,12 @@ public class ProductInfoController {
         System.out.println("delete");
         String[] temp=pIds.split(",");
         int num=0;
-        for (String string:temp
+        /*for (String string:temp
              ) {
             num+=productInfoService.deleteByKey(Integer.parseInt(string));
-        }
-        //num=productInfoService.deleteBatch(temp);
+        }*/
+        num=productInfoService.deleteBatch(temp);
+        System.out.println("num:"+num);
         PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
         session.setAttribute("info",pageInfo);
 
