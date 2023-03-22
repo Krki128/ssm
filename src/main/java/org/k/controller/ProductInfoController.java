@@ -59,7 +59,7 @@ public class ProductInfoController {
     public Object ajaxImg (MultipartFile pImage, HttpServletRequest request){
         System.out.println("ajax Img");
         fileName= FileNameUtil.getUUIDFileName()+
-                FileNameUtil.getRealFileName(Objects.requireNonNull(pImage.getOriginalFilename()));
+                FileNameUtil.getRealFileName((pImage.getOriginalFilename()));
         String path=request.getServletContext().getRealPath("/image_big");
         try{
             pImage.transferTo(new File(path+File.separator+fileName));
