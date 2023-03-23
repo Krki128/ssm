@@ -37,7 +37,6 @@ public class AdminServiceImpl implements org.k.service.AdminService {
             if(password.equals(admin.getaPass()))
                 return admin;
         }
-
         return null;
     }
 }

@@ -69,7 +69,7 @@
                         dataType:"text",
                         success:function (state) {
                             //alert(state);
-                            state==1?alert("删除成功"):alert("删除失败");
+                            state==true?alert("删除成功"):alert("删除失败");
                             //将页面上显示商品数据的容器重新加载
                             $("#table").load("http://localhost:8080/admin/product.jsp #table");
                             //$("#table").load("${pageContext.request.contextPath}/product/split #table");
@@ -92,7 +92,7 @@
                     dataType: "text",
                     success: function (state) {
                         //alert(state);
-                        state==1?alert("删除成功"):alert("删除失败");
+                        state==true?alert("删除成功"):alert("删除失败");
                         $("#table").load("http://localhost:8080/admin/product.jsp #table");
                         //$("#table").load("${pageContext.request.contextPath}/product/split #table");
                     }

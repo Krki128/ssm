@@ -3,13 +3,13 @@ package org.k.controller;
 import com.github.pagehelper.PageInfo;
 import org.json.JSONObject;
 import org.k.dao.ProductInfo;
+import org.k.dao.vo.ProductInfoVo;
 import org.k.service.ProductInfoService;
 import org.k.utils.FileNameUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -20,7 +20,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/product")
 public class ProductInfoController {
-    public static int PAGE_SIZE=5;
     ProductInfoService productInfoService;
     String fileName="";
 
@@ -36,19 +35,16 @@ public class ProductInfoController {
     }
 
     @RequestMapping("/split")
-    public String split(HttpSession session,
-                        @RequestParam(defaultValue = "1") int pageNum){
-        System.out.println("split");
-        PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(pageNum,PAGE_SIZE);
+    public String split(HttpSession session,ProductInfoVo productInfoVo){
+        PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(productInfoVo);
         session.setAttribute("info",pageInfo);
         return "product";
     }
 
     @ResponseBody
     @RequestMapping("/ajaxSplitPaging")
-    public void ajaxSplitPaging(int pageNum,HttpSession session){
-        System.out.println("ajax split");
-        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
+    public void ajaxSplitPaging(ProductInfoVo productInfoVo,HttpSession session){
+        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(productInfoVo);
         session.setAttribute("info",pageInfo);
     }
 
@@ -84,10 +80,8 @@ public class ProductInfoController {
         productInfo.setpDate(new Date());
         int num=productInfoService.create(productInfo);
         if(num>0)
-            //session.setAttribute("msg","添加成功");
             model.addAttribute("msg","添加成功");
         else
-            //session.setAttribute("msg","添加失败");
             model.addAttribute("msg","添加失败");
         return "forward:/product/split";
     }
@@ -110,10 +104,8 @@ public class ProductInfoController {
         }
         int num=productInfoService.update(productInfo);
         if(num>0)
-            //session.setAttribute("msg","更新成功");
             model.addAttribute("msg","更新成功");
         else
-            //session.setAttribute("msg","更新失败");
             model.addAttribute("msg","更新失败");
         return "forward:/product/split";
     }
@@ -121,23 +113,24 @@ public class ProductInfoController {
     @ResponseBody
     @PostMapping("/deleteProduct")
     public Object deleteProduct(String pIds,int pageNum,HttpSession session){
-        System.out.println("delete");
         String[] temp=pIds.split(",");
-        int num=0;
-        /*for (String string:temp
-             ) {
-            num+=productInfoService.deleteByKey(Integer.parseInt(string));
-        }*/
-        num=productInfoService.deleteBatch(temp);
+        int num=productInfoService.deleteBatch(temp);
         System.out.println("num:"+num);
-        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum,PAGE_SIZE);
+        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum);
         session.setAttribute("info",pageInfo);
 
         JSONObject jsonObject=new JSONObject();
-        if(num == temp.length)
-            jsonObject.put("state",1);
+       if(num == temp.length)
+            jsonObject.put("state",true);
         else
-            jsonObject.put("state",0);
+            jsonObject.put("state",false);
         return jsonObject.toString();
+    }
+
+    @ResponseBody
+    @PostMapping("/ajaxCondition")
+    public void selectCondition(ProductInfoVo productInfoVo,HttpSession session){
+        List<ProductInfo> productInfoList=productInfoService.selectCondition(productInfoVo);
+        session.setAttribute("info",productInfoList);
     }
 }

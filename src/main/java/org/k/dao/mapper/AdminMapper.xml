@@ -68,6 +68,11 @@
   <sql id="Base_Column_List">
     a_id, a_name, a_pass
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from admin
+  </select>
   <select id="selectByExample" parameterType="org.k.dao.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">

@@ -29,7 +29,7 @@ public interface ProductInfoMapper {
 
     int updateByPrimaryKey(ProductInfo row);
 
-    int deleteBatch(String[] temp);
-
     List<ProductInfo> selectCondition(ProductInfoVo productInfoVo);
+
+    int deleteBatch(String[] temp);
 }

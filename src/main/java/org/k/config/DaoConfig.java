@@ -2,7 +2,10 @@ package org.k.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;
+import org.apache.ibatis.logging.log4j.Log4jImpl;
+import org.apache.ibatis.logging.slf4j.Slf4jImpl;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.session.Configuration;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,10 +65,12 @@ public class DaoConfig {
     public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource,
              PageInterceptor pageInterceptor){
         SqlSessionFactoryBean sqlSessionFactoryBean=new SqlSessionFactoryBean();
+        Configuration configuration=new Configuration();
+        configuration.setLogImpl(Log4jImpl.class);
         sqlSessionFactoryBean.setTypeAliasesPackage("org.k.doa");
         sqlSessionFactoryBean.setDataSource(dataSource);
-
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
+        sqlSessionFactoryBean.setConfiguration(configuration);
         return sqlSessionFactoryBean;
     }
 }
