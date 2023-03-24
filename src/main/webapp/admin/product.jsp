@@ -146,7 +146,8 @@
                 data:{"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
                 success:function () {
                     //刷新显示数据的容器
-                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    //$("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    $("#table").load(location.href+" #table");
                 }
             });
         }
