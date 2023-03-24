@@ -115,10 +115,14 @@
 
         //分页的AJAX实现
         function ajaxsplit(pageNum) {
+            var pname = $("#pname").val();
+            var typeid = $("#typeid").val();
+            var lprice = $("#lprice").val();
+            var hprice = $("#hprice").val();
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
-                data: {"pageNum": pageNum},
+                data: {"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice,"pageNum": pageNum},
                 type: "post",
                 success: function () {
                     //重新加载显示分页数据的容器
@@ -157,14 +161,21 @@
     <!--筛选条件-->
     <div id="condition" style="text-align: center">
         <form id="myform">
-            商品名称：<input name="pname" id="pname">
+            商品名称：<input name="pname" id="pname" value="${productInfoVo.pname}">
             商品类型：<select name="typeid" id="typeid">
                 <option value="-1">请选择</option>
                 <c:forEach items="${typeList}" var="pt">
                     <option value="${pt.typeId}">${pt.typeName}</option>
                 </c:forEach>
             </select>
-            价格：<input name="lprice" id="lprice">-<input name="hprice" id="hprice">
+            <script>
+                let options=document.getElementById("typeid").options;
+                for(let i=0;i<options;i++){
+                    if(options[i].value==${productInfoVo.typeid})
+                        options[i].selected=true;
+                }
+            </script>
+            价格：<input name="lprice" id="lprice" value="${productInfoVo.lprice}">-<input name="hprice" id="hprice" value="${productInfoVo.hprice}">
             <input type="button" value="查询" onclick="condition()">
         </form>
     </div><br>

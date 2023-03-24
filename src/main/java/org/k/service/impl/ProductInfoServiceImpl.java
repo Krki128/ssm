@@ -29,9 +29,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         //ProductInfoExample productInfoExample=new ProductInfoExample();
         //productInfoExample.setOrderByClause("p_id desc");
         //List<ProductInfo> productInfoList= productInfoMapper.selectByExample(productInfoExample);
-        List<ProductInfo> productInfoList=productInfoMapper.selectCondition(productInfoVo);
 
-        return new PageInfo<ProductInfo>(productInfoList);
+        return new PageInfo<>(productInfoMapper.selectCondition(productInfoVo));
     }
 
     public int create(ProductInfo productInfo) {
@@ -56,8 +55,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     public PageInfo<ProductInfo> selectCondition(ProductInfoVo productInfoVo) {
-
-        return null;
+        PageHelper.startPage(productInfoVo.getPageNum(),PAGE_SIZE);
+        return new PageInfo<>(productInfoMapper.selectCondition(productInfoVo));
     }
 
 

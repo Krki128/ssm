@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/product")
@@ -38,6 +39,7 @@ public class ProductInfoController {
     public String split(HttpSession session,ProductInfoVo productInfoVo){
         PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(productInfoVo);
         session.setAttribute("info",pageInfo);
+        session.setAttribute("productInfoVo",productInfoVo);
         return "product";
     }
 
@@ -53,7 +55,7 @@ public class ProductInfoController {
     public Object ajaxImg (MultipartFile pImage, HttpServletRequest request){
         System.out.println("ajax Img");
         fileName= FileNameUtil.getUUIDFileName()+
-                FileNameUtil.getRealFileName((pImage.getOriginalFilename()));
+                FileNameUtil.getRealFileName((Objects.requireNonNull(pImage.getOriginalFilename())));
         String path=request.getServletContext().getRealPath("/image_big");
         try{
             pImage.transferTo(new File(path+File.separator+fileName));
@@ -66,71 +68,66 @@ public class ProductInfoController {
     }
 
     @GetMapping("/addProduct")
-    public String addProduct(int pageNum,Model model){
+    public String addProduct(ProductInfoVo productInfoVo,Model model){
         System.out.println("jump addProduct");
-        model.addAttribute("pageNum",pageNum);
+        model.addAttribute("productInfoVo",productInfoVo);
         return "addProduct";
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(ProductInfo productInfo, Model model){
+    public String addProduct(ProductInfo productInfo,ProductInfoVo productInfoVo,Model model){
         System.out.println("product added");
         productInfo.setpImage(fileName);
         fileName="";
         productInfo.setpDate(new Date());
         int num=productInfoService.create(productInfo);
-        if(num>0)
-            model.addAttribute("msg","添加成功");
-        else
-            model.addAttribute("msg","添加失败");
+        String string=num>0?"添加成功":"添加失败";
+        model.addAttribute("msg",string);
+        model.addAttribute("productInfoVo",productInfoVo);
         return "forward:/product/split";
     }
 
     @GetMapping("/updateProduct")
-    public String updateProduct(int pId,int pageNum,Model model){
+    public String updateProduct(int pId,ProductInfoVo productInfoVo,Model model){
         System.out.println("jump updateProduct");
         ProductInfo productInfo=productInfoService.selectByKey(pId);
-        model.addAttribute("pageNum",pageNum);
+        model.addAttribute("productInfoVo",productInfoVo);
         model.addAttribute("prod",productInfo);
         return "updateProduct";
     }
 
     @PostMapping("/updateProduct")
-    public String updateProduct(ProductInfo productInfo,Model model){
+    public String updateProduct(ProductInfo productInfo,ProductInfoVo productInfoVo,Model model){
         System.out.println("Product updated");
         if(!fileName.equals("")){
             productInfo.setpImage(fileName);
             fileName = "";
         }
         int num=productInfoService.update(productInfo);
-        if(num>0)
-            model.addAttribute("msg","更新成功");
-        else
-            model.addAttribute("msg","更新失败");
+        String string=num>0?"添加成功":"添加失败";
+        model.addAttribute("msg",string);
+        model.addAttribute("productInfoVo",productInfoVo);
         return "forward:/product/split";
     }
 
     @ResponseBody
     @PostMapping("/deleteProduct")
-    public Object deleteProduct(String pIds,int pageNum,HttpSession session){
+    public Object deleteProduct(String pIds,ProductInfoVo productInfoVo,HttpSession session){
         String[] temp=pIds.split(",");
         int num=productInfoService.deleteBatch(temp);
         System.out.println("num:"+num);
-        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(pageNum);
+        PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(productInfoVo);
         session.setAttribute("info",pageInfo);
 
         JSONObject jsonObject=new JSONObject();
-       if(num == temp.length)
-            jsonObject.put("state",true);
-        else
-            jsonObject.put("state",false);
+        jsonObject.put("state", num == temp.length);
         return jsonObject.toString();
     }
 
     @ResponseBody
     @PostMapping("/ajaxCondition")
     public void selectCondition(ProductInfoVo productInfoVo,HttpSession session){
-        List<ProductInfo> productInfoList=productInfoService.selectCondition(productInfoVo);
+        PageInfo<ProductInfo> productInfoList=productInfoService.selectCondition(productInfoVo);
         session.setAttribute("info",productInfoList);
     }
 }

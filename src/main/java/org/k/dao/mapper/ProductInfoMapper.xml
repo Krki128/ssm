@@ -267,7 +267,7 @@
     select <include refid="Base_Column_List"/>
     from product_info
     <where>
-      <if test="panme !=null and panme !=''">
+      <if test="pname !=null and pname !=''">
         and p_name like #{name}
       </if>
       <if test="typeid !=null and typeid !=-1">
