@@ -1,10 +1,10 @@
 package org.k.dao.vo;
 
 public class ProductInfoVo {
-    private String pname;
-    private Integer typeid;
-    private Double lprice;
-    private Double hprice;
+    private String pName;
+    private Integer typeId;
+    private Double lPrice;
+    private Double hPrice;
     private  int pageNum;
 
     public int getPageNum() {
@@ -15,54 +15,43 @@ public class ProductInfoVo {
         this.pageNum = pageNum;
     }
 
-    public ProductInfoVo(String pname, Integer typeid, Double lprice, Double hprice) {
-        this.pname = pname;
-        this.typeid = typeid;
-        this.lprice = lprice;
-        this.hprice = hprice;
+    public ProductInfoVo(String pName, Integer typeId, Double lPrice, Double hPrice) {
+        this.pName = pName;
+        this.typeId = typeId;
+        this.lPrice = lPrice;
+        this.hPrice = hPrice;
         this.pageNum = 1;
     }
 
-    public String getPname() {
-        return pname;
+    public String getpName() {
+        return pName;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 
-    public Integer getTypeid() {
-        return typeid;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setTypeid(Integer typeid) {
-        this.typeid = typeid;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 
-    public Double getLprice() {
-        return lprice;
+    public Double getlPrice() {
+        return lPrice;
     }
 
-    public void setLprice(Double lprice) {
-        this.lprice = lprice;
+    public void setlPrice(Double lPrice) {
+        this.lPrice = lPrice;
     }
 
-    public Double getHprice() {
-        return hprice;
+    public Double gethPrice() {
+        return hPrice;
     }
 
-    public void setHprice(Double hprice) {
-        this.hprice = hprice;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductInfoVo{" +
-                "pname='" + pname + '\'' +
-                ", typeid=" + typeid +
-                ", lprice=" + lprice +
-                ", hprice=" + hprice +
-                ", pageNum=" + pageNum +
-                '}';
+    public void sethPrice(Double hPrice) {
+        this.hPrice = hPrice;
     }
 }

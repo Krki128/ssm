@@ -267,20 +267,20 @@
     select <include refid="Base_Column_List"/>
     from product_info
     <where>
-      <if test="pname !=null and pname !=''">
-        and p_name like #{name}
+      <if test="pName !=null and pName !=''">
+        and p_name like #{pName}
       </if>
-      <if test="typeid !=null and typeid !=-1">
-        and type_id =#{typeid}
+      <if test="typeId !=null and typeId !=-1">
+        and type_id =#{typeId}
       </if>
-      <if test="lprice !=null and lprice !='' and (hprice==null or hprice=='')">
-        and p_price &gt;=#{lprice}
+      <if test="lPrice !=null and lPrice !='' and (hPrice==null or hPrice=='')">
+        and p_price &gt;=#{lPrice}
       </if>
-      <if test="hprice !=null and hprice !='' and (lprice==null or lprice=='')">
-        and p_price &lt;=#{hprice}
+      <if test="hPrice !=null and hPrice !='' and (lPrice==null or lPrice=='')">
+        and p_price &lt;=#{hPrice}
       </if>
-      <if test="lprice !=null and lprice !='' and hprice !=null and hprice !=''">
-        and p_price between #{lrpice} and #{hprice}
+      <if test="lPrice !=null and lPrice !='' and hPrice !=null and hPrice !=''">
+        and p_price between #{lPrice} and #{hPrice}
       </if>
     </where>
     order by p_id desc

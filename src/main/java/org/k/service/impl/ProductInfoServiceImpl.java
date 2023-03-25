@@ -25,11 +25,9 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     public PageInfo<ProductInfo> splitPage(ProductInfoVo productInfoVo) {
         PageHelper.startPage(productInfoVo.getPageNum(),PAGE_SIZE);
-
         //ProductInfoExample productInfoExample=new ProductInfoExample();
         //productInfoExample.setOrderByClause("p_id desc");
         //List<ProductInfo> productInfoList= productInfoMapper.selectByExample(productInfoExample);
-
         return new PageInfo<>(productInfoMapper.selectCondition(productInfoVo));
     }
 
@@ -53,11 +51,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return productInfoMapper.deleteBatch(temp);
     }
 
-    @Override
     public PageInfo<ProductInfo> selectCondition(ProductInfoVo productInfoVo) {
         PageHelper.startPage(productInfoVo.getPageNum(),PAGE_SIZE);
         return new PageInfo<>(productInfoMapper.selectCondition(productInfoVo));
     }
-
-
 }
