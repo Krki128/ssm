@@ -12,7 +12,7 @@ public interface ProductInfoService {
 
     PageInfo<ProductInfo> splitPage(ProductInfoVo productInfoVo);
 
-    int create(ProductInfo productInfo);
+    int createProduct(ProductInfo productInfo);
 
     ProductInfo selectByKey(int pId);
 

@@ -1,10 +1,10 @@
 package org.k.dao.vo;
 
 public class ProductInfoVo {
-    private String pName;
-    private Integer typeId;
-    private Double lPrice;
-    private Double hPrice;
+    private String pNameVo;
+    private Integer typeIdVo;
+    private Double lPriceVo;
+    private Double hPriceVo;
     private  int pageNum;
 
     public int getPageNum() {
@@ -15,43 +15,54 @@ public class ProductInfoVo {
         this.pageNum = pageNum;
     }
 
-    public ProductInfoVo(String pName, Integer typeId, Double lPrice, Double hPrice) {
-        this.pName = pName;
-        this.typeId = typeId;
-        this.lPrice = lPrice;
-        this.hPrice = hPrice;
+    public ProductInfoVo(String pNameVo, Integer typeIdVo, Double lPriceVo, Double hPriceVo) {
+        this.pNameVo = pNameVo;
+        this.typeIdVo = typeIdVo;
+        this.lPriceVo = lPriceVo;
+        this.hPriceVo = hPriceVo;
         this.pageNum = 1;
     }
 
-    public String getpName() {
-        return pName;
+    public String getpNameVo() {
+        return pNameVo;
     }
 
-    public void setpName(String pName) {
-        this.pName = pName;
+    public void setpNameVo(String pNameVo) {
+        this.pNameVo = pNameVo;
     }
 
-    public Integer getTypeId() {
-        return typeId;
+    public Integer getTypeIdVo() {
+        return typeIdVo;
     }
 
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
+    public void setTypeIdVo(Integer typeIdVo) {
+        this.typeIdVo = typeIdVo;
     }
 
-    public Double getlPrice() {
-        return lPrice;
+    public Double getlPriceVo() {
+        return lPriceVo;
     }
 
-    public void setlPrice(Double lPrice) {
-        this.lPrice = lPrice;
+    public void setlPriceVo(Double lPriceVo) {
+        this.lPriceVo = lPriceVo;
     }
 
-    public Double gethPrice() {
-        return hPrice;
+    public Double gethPriceVo() {
+        return hPriceVo;
     }
 
-    public void sethPrice(Double hPrice) {
-        this.hPrice = hPrice;
+    public void sethPriceVo(Double hPriceVo) {
+        this.hPriceVo = hPriceVo;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductInfoVo{" +
+                "pNameVo='" + pNameVo + '\'' +
+                ", typeIdVo=" + typeIdVo +
+                ", lPriceVo=" + lPriceVo +
+                ", hPriceVo=" + hPriceVo +
+                ", pageNum=" + pageNum +
+                '}';
     }
 }

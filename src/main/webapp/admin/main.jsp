@@ -8,7 +8,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js/"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
 	<title>main</title>
-	<%--<link href="${pageContext.request.contextPath}/css/main.css" rel="stylesheet" >--%>
 </head>
 <body>
 <!--整体部分-->
@@ -34,7 +33,7 @@
 			</div>
 			<div id="lbottom">
 				<ul>
-					<a href="${pageContext.request.contextPath}/product/split?" target="myright" >
+					<a href="${pageContext.request.contextPath}/product/split" target="myright" >
 						<li class="two"><span class="glyphicon glyphicon-book" style="color: white;"/> 商品管理 <span class="glyphicon glyphicon-play" style="color: white;"/> </li>
 					</a>
 					<a href="${pageContext.request.contextPath}/admin/err.jsp" target="myright">

@@ -31,7 +31,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return new PageInfo<>(productInfoMapper.selectCondition(productInfoVo));
     }
 
-    public int create(ProductInfo productInfo) {
+    public int createProduct(ProductInfo productInfo) {
         return productInfoMapper.insert(productInfo);
     }
 

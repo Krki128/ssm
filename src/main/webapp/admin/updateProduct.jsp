@@ -129,12 +129,17 @@
 									   onclick="myClose()">
 								<script>
 									function myClose(){
-										location.href="${pageContext.request.contextPath}/product/split?pageNum=${pageNum}";
+										location.href="${pageContext.request.contextPath}/product/split?pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${productInfoVo.pageNum}";
 									}
 								</script>
 							</td>
 						</tr>
 					</table>
+					<input type="hidden" name="pNameVo" value="${productInfoVo.pNameVo}">
+					<input type="hidden" name="typeIdVo" value="${productInfoVo.typeIdVo}">
+					<input type="hidden" name="lPriceVo" value="${productInfoVo.lPriceVo}">
+					<input type="hidden" name="hPriceVo" value="${productInfoVo.hPriceVo}">
+					<input type="hidden" name="pageNum" value="${productInfoVo.pageNum}">
 				</form>
 			</div>
 		</div>

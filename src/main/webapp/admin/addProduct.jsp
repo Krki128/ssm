@@ -40,7 +40,7 @@
 				<p>商品管理>新增商品</p>
 			</div>
 			<div id="table">
-				<form  id="myform" action="${pageContext.request.contextPath}/product/addProduct" method="post"
+				<form  id="myform" action="${pageContext.request.contextPath}/product/createProduct" method="post"
 					   enctype="multipart/form-data">
 					<table>
 						<tr>
@@ -113,12 +113,17 @@
 								<input type="reset" value="取消" class="btn btn-default" onclick="closeAdd()">
 								<script type="text/javascript">
 									function closeAdd() {
-										location.href="${pageContext.request.contextPath}/product/split?pageNum=${pageNum}";
+										location.href="${pageContext.request.contextPath}/product/split?pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${productInfoVo.pageNum}";
 									}
 								</script>
 							</td>
 						</tr>
 					</table>
+					<input type="hidden" name="pNameVo" value="${productInfoVo.pNameVo}">
+					<input type="hidden" name="typeIdVo" value="${productInfoVo.typeIdVo}">
+					<input type="hidden" name="lPriceVo" value="${productInfoVo.lPriceVo}">
+					<input type="hidden" name="hPriceVo" value="${productInfoVo.hPriceVo}">
+					<input type="hidden" name="pageNum" value="${productInfoVo.pageNum}">
 				</form>
 			</div>
 		</div>

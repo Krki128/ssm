@@ -31,9 +31,9 @@
         //单个复选框点击改变全选复选框功能实现
         function ckClick() {
             //得到下面五个复选框的个数
-            var fiveLength = $("input[name='ck']").length;
+            let fiveLength = $("input[name='ck']").length;
             //得到下面五个复选框被选中的个数
-            var checkedLength = $("input[name='ck']:checked").length;
+            let checkedLength = $("input[name='ck']:checked").length;
             //进行对比,改变全选复选框的状态
             if(fiveLength == checkedLength){
                 $("#all").prop("checked",true);
@@ -45,13 +45,13 @@
         //批量删除
         function deleteBatch() {
             //得到所有选中复选框的对象,根据其长度判断是否有选中商品
-            var cks = $("input[name='ck']:checked");  //1,4,5
+            let cks = $("input[name='ck']:checked");  //1,4,5
             //如果没有选中的商品
             if(cks.length == 0){
                 alert("请先选择将要删除的商品!");
             }else{
-                var str = "";
-                var pid = "";
+                let str = "";
+                let pid = "";
                 if(confirm("您确定要删除"+cks.length+"条商品吗?")){
                     //获取其value的值,进行字符串拼接
                     $.each(cks,function () {
@@ -81,13 +81,16 @@
 
         //单个删除
         function del(pId) {
+            let pNameVo = $("#pname").val();
+            let typeIdVo = $("#typeid").val();
+            let lPriceVo = $("#lprice").val();
+            let hPriceVo = $("#hprice").val();
             let str=pId+",";
             //弹框提示
             if (confirm("您确定删除吗?")) {
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/product/deleteProduct",
-                    //data: {"pid": pid,"pageNum": pageNum,"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
-                    data: {"pIds": str,"pageNum": ${info.pageNum}},
+                    url: "${pageContext.request.contextPath}/product/ajaxDeleteProduct",
+                    data: {"pIds": str,"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": ${productinfoVo.pageNum}},
                     type: "post",
                     dataType: "text",
                     success: function (state) {
@@ -102,33 +105,25 @@
 
         //跳转更新jsp
         function update(pId) {
-            /*取出查询条件
-        var pname = $("#pname").val();
-        var typeid = $("#typeid").val();
-        var lprice = $("#lprice").val();
-        var hprice = $("#hprice").val();
-         */
             //向服务器提交请求,传递商品id
-            let string="pId="+pId+"&pageNum="+${info.pageNum};
+            let string="pId="+pId+"";
             location.href = "${pageContext.request.contextPath}/product/updateProduct?"+string;
         }
 
         //分页的AJAX实现
-        function ajaxsplit(pageNum) {
-            var pname = $("#pname").val();
-            var typeid = $("#typeid").val();
-            var lprice = $("#lprice").val();
-            var hprice = $("#hprice").val();
+        function ajaxSplit(pageNum) {
+            let pNameVo = $("#pname").val();
+            let typeIdVo = $("#typeid").val();
+            let lPriceVo = $("#lprice").val();
+            let hPriceVo = $("#hprice").val();
             //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
             $.ajax({
                 url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
-                data: {"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice,"pageNum": pageNum},
+                data: {"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": pageNum},
                 type: "post",
                 success: function () {
                     //重新加载显示分页数据的容器
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                    //$("#table").load("${pageContext.request.contextPath}/product/split #table");
-                    //location.href="${pageContext.request.contextPath}/product/split"
                 }
             });
         }
@@ -136,18 +131,18 @@
         //条件查询
         function condition() {
             //取出查询条件
-            var pname = $("#pname").val();
-            var typeid = $("#typeid").val();
-            var lprice = $("#lprice").val();
-            var hprice = $("#hprice").val();
+            let pNameVo = $("#pname").val();
+            let typeIdVo = $("#typeid").val();
+            let lPriceVo = $("#lprice").val();
+            let hPriceVo = $("#hprice").val();
             $.ajax({
                 type:"post",
                 url:"${pageContext.request.contextPath}/product/ajaxCondition",
-                data:{"pname":pname,"typeid":typeid,"lprice":lprice,"hprice":hprice},
+                data:{"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo},
                 success:function () {
                     //刷新显示数据的容器
-                    //$("#table").load("http://localhost:8080/admin/product.jsp #table");
-                    $("#table").load(location.href+" #table");
+                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    //$("#table").load(location.href+" #table");
                 }
             });
         }
@@ -162,23 +157,23 @@
     <!--筛选条件-->
     <div id="condition" style="text-align: center">
         <form id="myform">
-            商品名称：<input name="pname" id="pname" value="${productInfoVo.pname}">
+            商品名称：<input name="pname" id="pname" value="${productInfoVo.pNameVo}">
             商品类型：<select name="typeid" id="typeid">
                 <option value="-1">请选择</option>
                 <c:forEach items="${typeList}" var="pt">
                     <option value="${pt.typeId}">${pt.typeName}</option>
                 </c:forEach>
             </select>
-            <script>
-                let options=document.getElementById("typeid").options;
-                for(let i=0;i<options;i++){
-                    if(options[i].value==${productInfoVo.typeid})
-                        options[i].selected=true;
-                }
-            </script>
-            价格：<input name="lprice" id="lprice" value="${productInfoVo.lprice}">-<input name="hprice" id="hprice" value="${productInfoVo.hprice}">
-            <input type="button" value="查询" onclick="condition()">
+            价格：<input name="lprice" id="lprice" value="${productInfoVo.lPriceVo}">-<input name="hprice" id="hprice" value="${productInfoVo.hPriceVo}">
+            <input type="button" value="查询" onclick="ajaxSplit(1)">
         </form>
+        <script>
+            let options=document.getElementById("typeid").options;
+            for(let i=0;i<options.length;i++){
+                if(options[i].value==${productInfoVo.typeIdVo})
+                    options[i].selected=true;
+            }
+        </script>
     </div><br>
     <!--显示商品-->
     <div id="table">
@@ -188,10 +183,10 @@
                     <!--全选按钮-->
                     <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
                     <!--新增和删除-->
-                    <a href="${pageContext.request.contextPath}/product/addProduct?pageNum=${info.pageNum}">
-                        <input type="button" class="btn btn-warning" id="btn1" value="新增商品">
+                    <a href="${pageContext.request.contextPath}/product/createProduct?pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${info.pageNum}">
+                        <input type="button" class="btn btn-info" id="btn1" value="新增商品">
                     </a>
-                    <input type="button" class="btn btn-warning" id="btn2" value="批量删除" onclick="deleteBatch()">
+                    <input type="button" class="btn btn-info" id="btn2" value="批量删除" onclick="deleteBatch()">
                 </div>
                 <div id="middle">
                     <!--显示分页后的商品-->
@@ -222,7 +217,7 @@
                                     <%--<button type="button" class="btn btn-info "
                                             onclick="update(${p.pId})">编辑
                                     </button>--%>
-                                    <a href="${pageContext.request.contextPath}/product/updateProduct?pId=${p.pId}&pageNum=${info.pageNum}">
+                                    <a href="${pageContext.request.contextPath}/product/updateProduct?pId=${p.pId}&pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${info.pageNum}">
                                         <input type="button" class="btn btn-info" value="编辑">
                                     </a>
                                     <button type="button" class="btn btn-warning" id="mydel"
@@ -239,26 +234,26 @@
                                 <ul class="pagination">
                                     <!--后退按钮-->
                                     <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${.prePage}" aria-label="Previous">--%>
-                                        <a href="javascript:ajaxsplit(${info.prePage})" aria-label="Previous">
+                                        <a href="javascript:ajaxSplit(${info.prePage})" aria-label="Previous">
                                             <span aria-hidden="true">«</span></a>
                                     </li>
                                     <!--循环显示所以的页面数字链接-->
                                     <c:forEach begin="1" end="${info.pages}" var="i">
                                         <c:if test="${info.pageNum==i}">
                                             <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}" style="background-color: grey">${i}</a>--%>
-                                                <a href="javascript:ajaxsplit(${i})"
+                                                <a href="javascript:ajaxSplit(${i})"
                                                    style="background-color: grey">${i}</a>
                                             </li>
                                         </c:if>
                                         <c:if test="${info.pageNum!=i}">
                                             <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=${i}">${i}</a>--%>
-                                                <a href="javascript:ajaxsplit(${i})">${i}</a>
+                                                <a href="javascript:ajaxSplit(${i})">${i}</a>
                                             </li>
                                         </c:if>
                                     </c:forEach>
                                     <!--前进按钮-->
                                     <li><%--<a href="${pageContext.request.contextPath}/prod/split.action?page=1" aria-label="Next">--%>
-                                        <a href="javascript:ajaxsplit(${info.nextPage})" aria-label="Next">
+                                        <a href="javascript:ajaxSplit(${info.nextPage})" aria-label="Next">
                                             <span aria-hidden="true">»</span></a>
                                     </li>
                                     <li style=" margin-left:150px;color: #0e90d2;height: 35px; line-height: 35px;">总共&nbsp;&nbsp;&nbsp;<font
