@@ -27,7 +27,6 @@
                 this.checked = flag;
             });
         }
-
         //单个复选框点击改变全选复选框功能实现
         function ckClick() {
             //得到下面五个复选框的个数
@@ -41,7 +40,52 @@
                 $("#all").prop("checked",false);
             }
         }
-
+        //分页的AJAX实现
+        function ajaxSplit(pageNum) {
+            let pNameVo = $("#pname").val();
+            let typeIdVo = $("#typeid").val();
+            let lPriceVo = $("#lprice").val();
+            let hPriceVo = $("#hprice").val();
+            //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
+            $.ajax({
+                url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
+                data: {"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": pageNum},
+                type: "post",
+                success: function () {
+                    //重新加载显示分页数据的容器
+                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                }
+            });
+        }
+        function ajaxDelete(str){
+            let pNameVo = $("#pname").val();
+            let typeIdVo = $("#typeid").val();
+            let lPriceVo = $("#lprice").val();
+            let hPriceVo = $("#hprice").val();
+            $.ajax({
+                url:"${pageContext.request.contextPath}/product/ajaxDeleteProduct",
+                data:{"pIds":str,"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": ${productInfoVo.pageNum}},
+                type:"post",
+                dataType:"text",
+                success:function (state) {
+                    //alert(state);
+                    if(state)
+                        alert("删除成功")
+                    else
+                        alert("删除失败");
+                    //将页面上显示商品数据的容器重新加载
+                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                }
+            });
+        }
+        //单个删除
+        function del(pId) {
+            let str=pId+",";
+            //弹框提示
+            if (confirm("您确定删除吗?")) {
+                ajaxDelete(str);
+            }
+        }
         //批量删除
         function deleteBatch() {
             //得到所有选中复选框的对象,根据其长度判断是否有选中商品
@@ -62,89 +106,9 @@
                         }
                     });
                     //发送ajax请求,进行批量删除的提交
-                    $.ajax({
-                        url:"${pageContext.request.contextPath}/product/deleteProduct",
-                        data:{"pIds":str,"pageNum":${info.pageNum}},
-                        type:"post",
-                        dataType:"text",
-                        success:function (state) {
-                            //alert(state);
-                            state==true?alert("删除成功"):alert("删除失败");
-                            //将页面上显示商品数据的容器重新加载
-                            $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                            //$("#table").load("${pageContext.request.contextPath}/product/split #table");
-                        }
-                    });
+                    ajaxDelete(str);
                 }
             }
-        }
-
-        //单个删除
-        function del(pId) {
-            let pNameVo = $("#pname").val();
-            let typeIdVo = $("#typeid").val();
-            let lPriceVo = $("#lprice").val();
-            let hPriceVo = $("#hprice").val();
-            let str=pId+",";
-            //弹框提示
-            if (confirm("您确定删除吗?")) {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/product/ajaxDeleteProduct",
-                    data: {"pIds": str,"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": ${productinfoVo.pageNum}},
-                    type: "post",
-                    dataType: "text",
-                    success: function (state) {
-                        //alert(state);
-                        state==true?alert("删除成功"):alert("删除失败");
-                        $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                        //$("#table").load("${pageContext.request.contextPath}/product/split #table");
-                    }
-                });
-            }
-        }
-
-        //跳转更新jsp
-        function update(pId) {
-            //向服务器提交请求,传递商品id
-            let string="pId="+pId+"";
-            location.href = "${pageContext.request.contextPath}/product/updateProduct?"+string;
-        }
-
-        //分页的AJAX实现
-        function ajaxSplit(pageNum) {
-            let pNameVo = $("#pname").val();
-            let typeIdVo = $("#typeid").val();
-            let lPriceVo = $("#lprice").val();
-            let hPriceVo = $("#hprice").val();
-            //向服务发出ajax请求,请示page页中的所有数据,在当前页面上局部刷新显示
-            $.ajax({
-                url: "${pageContext.request.contextPath}/product/ajaxSplitPaging",
-                data: {"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo,"pageNum": pageNum},
-                type: "post",
-                success: function () {
-                    //重新加载显示分页数据的容器
-                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                }
-            });
-        }
-
-        //条件查询
-        function condition() {
-            //取出查询条件
-            let pNameVo = $("#pname").val();
-            let typeIdVo = $("#typeid").val();
-            let lPriceVo = $("#lprice").val();
-            let hPriceVo = $("#hprice").val();
-            $.ajax({
-                type:"post",
-                url:"${pageContext.request.contextPath}/product/ajaxCondition",
-                data:{"pNameVo":pNameVo,"typeIdVo":typeIdVo,"lPriceVo":lPriceVo,"hPriceVo":hPriceVo},
-                success:function () {
-                    //刷新显示数据的容器
-                    $("#table").load("http://localhost:8080/admin/product.jsp #table");
-                    //$("#table").load(location.href+" #table");
-                }
-            });
         }
     </script>
 </head>
@@ -181,12 +145,12 @@
             <c:when test="${info.list.size()!=0}">
                 <div id="top">
                     <!--全选按钮-->
-                    <input type="checkbox" id="all" onclick="allClick()" style="margin-left: 50px">&nbsp;&nbsp;全选
+                    <input type="checkbox" id="all" style="margin-left: 50px" value="全选" onclick="allClick()">
                     <!--新增和删除-->
                     <a href="${pageContext.request.contextPath}/product/createProduct?pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${info.pageNum}">
                         <input type="button" class="btn btn-info" id="btn1" value="新增商品">
                     </a>
-                    <input type="button" class="btn btn-info" id="btn2" value="批量删除" onclick="deleteBatch()">
+                    <input type="button" class="btn btn-info" id="btn1" value="批量删除" onclick="deleteBatch()">
                 </div>
                 <div id="middle">
                     <!--显示分页后的商品-->
@@ -211,12 +175,7 @@
                                 <td><img width="55px" height="45px"
                                          src="${pageContext.request.contextPath}/image_big/${p.pImage}"></td>
                                 <td>${p.pNumber}</td>
-                                    <%--<td><a href="${pageContext.request.contextPath}/admin/product?flag=delete&pid=${p.pId}" onclick="return confirm('确定删除吗？')">删除</a>--%>
-                                    <%--&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/admin/product?flag=one&pid=${p.pId}">修改</a></td>--%>
                                 <td>
-                                    <%--<button type="button" class="btn btn-info "
-                                            onclick="update(${p.pId})">编辑
-                                    </button>--%>
                                     <a href="${pageContext.request.contextPath}/product/updateProduct?pId=${p.pId}&pNameVo=${productInfoVo.pNameVo}&typeIdVo=${productInfoVo.typeIdVo}&lPriceVo=${productInfoVo.lPriceVo}&hPriceVo=${productInfoVo.hPriceVo}&pageNum=${info.pageNum}">
                                         <input type="button" class="btn btn-info" value="编辑">
                                     </a>
