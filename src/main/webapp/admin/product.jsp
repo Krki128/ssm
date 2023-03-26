@@ -54,6 +54,7 @@
                 success: function () {
                     //重新加载显示分页数据的容器
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    //$("#table").load("http://10.147.17.3:8080/admin/product.jsp #table");
                 }
             });
         }
@@ -75,6 +76,7 @@
                         alert("删除失败");
                     //将页面上显示商品数据的容器重新加载
                     $("#table").load("http://localhost:8080/admin/product.jsp #table");
+                    //$("#table").load("http://10.147.17.3:8080/admin/product.jsp #table");
                 }
             });
         }

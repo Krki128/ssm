@@ -37,6 +37,7 @@ public class ProductInfoController {
 
     @RequestMapping("/split")
     public String split(ProductInfoVo productInfoVo, HttpSession session){
+        System.out.println(productInfoVo);
         PageInfo<ProductInfo> pageInfo= productInfoService.splitPage(productInfoVo);
         session.setAttribute("info",pageInfo);
         session.setAttribute("productInfoVo",productInfoVo);
@@ -46,6 +47,7 @@ public class ProductInfoController {
     @ResponseBody
     @RequestMapping("/ajaxSplitPaging")
     public void ajaxSplitPaging(ProductInfoVo productInfoVo,HttpSession session){
+        System.out.println(productInfoVo);
         PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(productInfoVo);
         session.setAttribute("productInfoVo",productInfoVo);
         session.setAttribute("info",pageInfo);
@@ -70,12 +72,14 @@ public class ProductInfoController {
 
     @GetMapping("/createProduct")
     public String createProduct(ProductInfoVo productInfoVo, Model model){
+        System.out.println(productInfoVo);
         model.addAttribute("productInfoVo",productInfoVo);
         return "addProduct";
     }
 
     @PostMapping("/createProduct")
     public String createProduct(ProductInfo productInfo, ProductInfoVo productInfoVo, Model model){
+        System.out.println(productInfoVo);
         productInfo.setpImage(fileName);
         fileName="";
         productInfo.setpDate(new Date());
@@ -88,6 +92,7 @@ public class ProductInfoController {
 
     @GetMapping("/updateProduct")
     public String updateProduct(int pId,ProductInfoVo productInfoVo,Model model){
+        System.out.println(productInfoVo);
         ProductInfo productInfo=productInfoService.selectByKey(pId);
         model.addAttribute("productInfoVo",productInfoVo);
         model.addAttribute("prod",productInfo);
@@ -96,6 +101,7 @@ public class ProductInfoController {
 
     @PostMapping("/updateProduct")
     public String updateProduct(ProductInfo productInfo,ProductInfoVo productInfoVo,Model model){
+        System.out.println(productInfoVo);
         if(!fileName.equals("")){
             productInfo.setpImage(fileName);
             fileName = "";
@@ -110,6 +116,7 @@ public class ProductInfoController {
     @ResponseBody
     @PostMapping("/ajaxDeleteProduct")
     public Object ajaxDeleteProduct(String pIds, ProductInfoVo productInfoVo, HttpSession session){
+        System.out.println(productInfoVo);
         String[] temp=pIds.split(",");
         int num=productInfoService.deleteBatch(temp);
         PageInfo<ProductInfo> pageInfo=productInfoService.splitPage(productInfoVo);
@@ -126,6 +133,7 @@ public class ProductInfoController {
     @ResponseBody
     @PostMapping("/ajaxCondition")
     public void ajaxCondition(ProductInfoVo productInfoVo, HttpSession session){
+        System.out.println(productInfoVo);
         PageInfo<ProductInfo> productInfoList=productInfoService.selectCondition(productInfoVo);
         session.setAttribute("info",productInfoList);
     }
