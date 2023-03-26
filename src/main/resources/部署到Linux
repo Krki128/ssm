@@ -1,0 +1,53 @@
+#JAVA
+java -version
+sudo apt update
+sudo apt install openjdk-11-jdk
+sudo apt install openjdk-8-jre
+sudo update-alternatives --config java
+
+sudo nano /etc/environment
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+source /etc/environment
+
+sudo vi /etc/bash.bashrc
+export JAVA_HOME=/usr/local/java/jdk1.8.0_131
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=."${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+source /etc/bash.bashrc
+echo $JAVA_HOME
+sudo apt remove openjdk-11-jdk
+
+#Tomcat
+vi apache-tomcat-9.0.73/bin/startup.sh
+export JAVA_HOME=/usr/local/java/jdk1.8.0_131
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=."${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+export TOMCAT_HOME=apache-tomcat-9.0.73
+
+#MySQL
+sudo apt purge mysql-*
+sudo rm -rf /etc/mysql/ /var/lib/mysql
+sudo apt autoremove
+sudo apt autolean
+
+sudo apt-get install mysql-server -y
+sudo service mysql status
+
+mysql -uroot -p
+sudo cat /etc/mysql/debian.cnf
+mysql -uxxx -pxxx
+use mysql;
+flush privileges;
+alter user 'root'@'localhost' identified with mysql_native_password by '122';
+flush privileges;
+
+#idea
+rename to ROOT.war
+
+rm -rf webapps/ROOT
+bin/startup.sh
+bin/shutdown.sh
+bin/catalina.sh run
+
