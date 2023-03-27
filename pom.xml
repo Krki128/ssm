@@ -94,23 +94,26 @@
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.v}</version>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>${jsp.v}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>${servlet.v}</version>
-      <scope>provided</scope>
-    </dependency>
+
     <dependency>
       <groupId>jstl</groupId>
       <artifactId>jstl</artifactId>
       <version>${jstl.v}</version>
     </dependency>
+    <!--
+    <dependency>
+          <groupId>javax.servlet.jsp</groupId>
+          <artifactId>javax.servlet.jsp-api</artifactId>
+          <version>${jsp.v}</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>${servlet.v}</version>
+          <scope>provided</scope>
+        </dependency>
+    -->
 
 
 
