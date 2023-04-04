@@ -19,7 +19,7 @@
 		</div>
 		<div id="top2"></div>
 		<div id="top3">
-			<span>欢迎您，${admin.aName}</span>
+			<span>欢迎您，${username}</span>
 		</div>
 	</div>
 	<!--下部分-->

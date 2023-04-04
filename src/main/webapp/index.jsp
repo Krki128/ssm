@@ -11,57 +11,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.js"></script>
-    <title>login</title>
+   <title>Welcome</title>
 </head>
 
 <body>
-<div id="login">
-    <div id="top">
-        <img src="${pageContext.request.contextPath}/images/cloud.jpg" /><span>LOGIN</span>
+    <div style="text-align: center">
+        Welcome to my ssm project<br>
+        <a href="${pageContext.servletContext.contextPath}/admin/login.jsp">登录</a>
     </div>
-    <div id="bottom">
-        <form action="/login" method="post">
-            <table style="border: 0px" id="table">
-                <tr>
-                    <td class="td1">用户名：</td>
-                    <td>
-                        <input type="text" value="admin" placeholder="Username" class="td2" name="name">
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <span id="nameerr"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td1">密码：</td>
-                    <td>
-                        <input type="password"  value="000000" placeholder="Password" class="td2" name="pwd">
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <span id="pwderr"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" value="登录" class="td3">
-                        <a href="${pageContext.request.contextPath}/admin/register.jsp">
-                            <input type="button" value="注册" class="td3	"></a>
-                    </td>
-                </tr>
-            </table>
-        </form>
-        ${errmsg}
-    </div>
-</div>
 </body>
 </html>

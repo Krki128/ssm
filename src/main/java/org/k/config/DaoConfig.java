@@ -30,10 +30,16 @@ public class DaoConfig {
     @Bean
     public DataSource dataSource(){
         DruidDataSource dataSource =new DruidDataSource();
+
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        //dataSource.setDriverClassName(driver);
+        //dataSource.setUrl(url);
         dataSource.setUrl("jdbc:mysql://localhost:3306/ssm?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true");
         dataSource.setUsername("root");
+        //dataSource.setUsername(username);
         dataSource.setPassword("1226");
+        //dataSource.setPassword(password);
+
         return dataSource;
     }
 
