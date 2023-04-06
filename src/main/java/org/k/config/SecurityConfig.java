@@ -1,7 +1,6 @@
 package org.k.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -25,15 +24,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/admin/login.jsp").loginProcessingUrl("/login")
-                .successForwardUrl("/home")
+        http.formLogin()
+                .loginPage("/admin/login.jsp").loginProcessingUrl("/login")
+                .successForwardUrl("/home").failureForwardUrl("/fail?msg=fail")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/product/**").access("hasRole('ADMIN')")
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
-                .headers().frameOptions().sameOrigin();
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .rememberMe()
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/admin/login.jsp");
     }
 
     @Override

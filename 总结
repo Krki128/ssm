@@ -9,7 +9,8 @@
 - ajax多条件查询后删除和更新停留在当前页处理
 
 优化
-- 使用SpringSecurity验证登录保护Web请求和方法调用
+- 使用SpringSecurity的Filter验证CRUD请求
+- 使用SpringSecurity的AOP切面验证CRUD方法调用
 - 修改查询业务逻辑，防止SQL注入
-- 使用Redis提高性能
+- 使用Redis进行缓存
 - 使用SpringCache？

@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: 26591
@@ -46,9 +47,8 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td>
-                        <span id="pwderr"></span>
-                    </td>
+                        <span id="pwderr"></span><input type="checkbox" name="remember-me" >记住我
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -60,7 +60,7 @@
                 </tr>
             </table>
         </form>
-        ${errmsg}
+        ${msg}
     </div>
 </div>
 </body>

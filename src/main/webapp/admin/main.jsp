@@ -19,7 +19,8 @@
 		</div>
 		<div id="top2"></div>
 		<div id="top3">
-			<span>欢迎您，${username}</span>
+			<span>欢迎您，${username}</span><br>
+			<a href="${pageContext.servletContext.contextPath}/logout" >登出</a>
 		</div>
 	</div>
 	<!--下部分-->

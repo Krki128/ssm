@@ -16,16 +16,16 @@ public class AdminController {
         this.adminService =adminService;
     }
 
-    @RequestMapping("/")
-    public String index(){
-        return "redirect:/login";
-    }
-
     //@RequestMapping(value = "/login",method = RequestMethod.POST)
     @RequestMapping("/home")
     public String home(String username,Model model){
         model.addAttribute("username",username);
         return "main";
+    }
+    @RequestMapping("/fail")
+    public String fail(String msg,Model model){
+        model.addAttribute("msg",msg);
+        return "login";
     }
 /*    @GetMapping("/login")
     public String getLogin(){
@@ -39,7 +39,7 @@ public class AdminController {
             return "redirect:main";
         }
         else{
-            model.addAttribute("errmsg","login fail");
+            model.addAttribute("msg","login fail");
             return "forward:/login";
         }
     }*/

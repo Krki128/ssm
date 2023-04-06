@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 new InternalResourceViewResolver();
         internalResourceViewResolver.setPrefix("/admin/");
         internalResourceViewResolver.setSuffix(".jsp");
-        internalResourceViewResolver.setExposeContextBeansAsAttributes(true);
+        //internalResourceViewResolver.setExposeContextBeansAsAttributes(true);
         internalResourceViewResolver.setViewClass(JstlView.class);
         return internalResourceViewResolver;
     }
